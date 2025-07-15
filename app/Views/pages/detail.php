@@ -18,7 +18,7 @@
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">Tanggal Lahir: </p>
-                <p class="text-gray-900" id="date"><?= ($data['birth_date'] != null) ?: ''  ?></p>
+                <p class="text-gray-900" id="birth-date"><?= ($data['birth_date']) ? $data['birth_date'] : ''  ?></p>
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">Status: </p>
@@ -227,7 +227,8 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                 </svg>
                             </div>
-                            <input datepicker id="birth-date" name="birth-date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                            <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>"  id="birth-date-edit" name="birth-date" value="" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+
                         </div>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
@@ -297,6 +298,7 @@
     </div>
 </div>
 
+
 <!-- Add Measurement Data -->
 <div id="add-data" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md sm:max-w-lg max-h-full">
@@ -327,29 +329,29 @@
                 <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-6">
                     <div class="sm:col-span-6">
                         <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Umur (bulan)</label>
-                        <input value="<?= end($measurements)['age'] + 1 ?>" type="number" name="age" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <input value="" type="number" name="age" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Umur harus diisi</p>
 
                     </div>
                     <div class="sm:col-span-3">
                         <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi (cm)</label>
-                        <input value="<?= end($measurements)['height'] ?>" type="number" name="height" id="height" step="0.1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <input value="<?= ($measurements) ? end($measurements)['height'] : '' ?>" type="number" name="height" id="height" step="0.1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                     <div class="sm:col-span-3">
                         <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat (kg)</label>
-                        <input value="<?= end($measurements)['weight'] ?>" type="number" name="weight" step="0.1" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <input value="<?= ($measurements) ? end($measurements)['weight'] : '' ?>" type="number" name="weight" step="0.1" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                     <div class="sm:col-span-2">
                         <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Kepala (cm)</label>
-                        <input value="<?= end($measurements)['head_circum'] ?>" type="number" name="head_circum" step="0.1" id="head_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <input value="<?= ($measurements) ? end($measurements)['head_circum'] : '' ?>" type="number" name="head_circum" step="0.1" id="head_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                     <div class="sm:col-span-2">
                         <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Dada (cm)</label>
-                        <input value="<?= end($measurements)['chest_size'] ?>" type="number" name="chest_size" step="0.1" id="chest_size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <input value="<?= ($measurements) ? end($measurements)['chest_size'] : '' ?>" type="number" name="chest_size" step="0.1" id="chest_size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                     <div class="sm:col-span-2">
                         <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Lengan (kg)</label>
-                        <input value="<?= end($measurements)['arm_circum'] ?>" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <input value="<?= ($measurements) ? end($measurements)['arm_circum'] : '' ?>" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -362,6 +364,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Edit Measurement Data -->
 <div id="edit-data" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -432,12 +435,37 @@
 <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
 <script>
     // Mengubah format tanggal lahir
-    const date = document.getElementById('date');
+    const date = document.getElementById('birth-date');
+
     if (date.innerText != '') {
+        const birthDate = new Date(date.innerText);
+        const nowDate = new Date();
+
+        // Mengubah ke bentuk mm/dd/yy untuk datepicker
+        const year = birthDate.getFullYear().toString().slice(-4); // Ambil 2 digit terakhir tahun
+        const month = (birthDate.getMonth() + 1).toString().padStart(2, '0'); // getMonth() dimulai dari 0
+        const day = birthDate.getDate().toString().padStart(2, '0');
+
+        const tanggalTerformat = `${month}/${day}/${year}`;
+        document.getElementById('birth-date-edit').value = tanggalTerformat;
+
+        // Default value untuk umur saat ini
+        let yearAge = nowDate.getFullYear() - birthDate.getFullYear();
+        let monthAge = nowDate.getMonth() - birthDate.getMonth();
+
+        if (nowDate.getDate() < birthDate.getDate()) {
+            monthAge--;
+        }
+
+        const totalBulan = (yearAge * 12) + monthAge;
+        document.querySelector('#add-data #age').value = totalBulan;
+
+        // Mengubah ke bentuk lokal
         toLocalDate(date);
     } else {
         date.innerText = '-';
     }
+
 
     // Mengubah data gender dan isToddler supaya terbaca
     const gender = document.getElementById('gender');
@@ -497,7 +525,7 @@
         const getAllAges = () => {
             return measurements.map(item => parseInt(item.age));
         }
-        
+
         function validationInput(e) {
             e.preventDefault();
             const dataInput = {};
@@ -528,8 +556,8 @@
 
             const allAges = getAllAges();
 
-            if (dataInput['age'].disabled){
-                
+            if (dataInput['age'].disabled) {
+
             } else if (dataInput['age'].value == '') { // Mengatasi umur kosong
                 showMessage('age', 'Umur harus diisi');
                 return false;
@@ -548,21 +576,21 @@
             } else {
                 valAlert.classList.add('hidden');
             }
-            
+
             return true;
         }
 
         const addForm = document.getElementById('add-form');
-        addForm.addEventListener('submit', function(e){
+        addForm.addEventListener('submit', function(e) {
             if (validationInput(e)) {
                 this.submit();
             }
         });
-        
+
         // Edit Validation
         const editMeasurementForm = document.getElementById("edit-measurement-form");
         const editButtons = document.querySelectorAll(".edit-btn");
-        
+
         // Auto fill input data
         editButtons.forEach(button => {
             button.addEventListener("click", function() {
@@ -589,7 +617,7 @@
             });
         });
 
-        editMeasurementForm.addEventListener('submit', function(e){
+        editMeasurementForm.addEventListener('submit', function(e) {
             if (validationInput(e)) {
                 this.querySelector("#age").disabled = false;
                 this.submit();
