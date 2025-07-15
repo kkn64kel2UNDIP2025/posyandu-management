@@ -14,6 +14,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
     <!-- Core Css -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
+    <script>
+        const toLocalDate = (date) => {
+            let indDate = new Date(date.innerText);
+
+            indDate = indDate.toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
+
+            date.innerText = indDate;
+        }
+    </script>
     <title><?= $title ?></title>
 </head>
 

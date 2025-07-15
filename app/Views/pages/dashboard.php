@@ -541,5 +541,6 @@
             </p>
         </footer>
 <!-- Main Content End -->
-
+    <script src="<?= base_url('assets/js/dashboard.js') ?>"></script>
+    <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
 <?php $this->endSection() ?>

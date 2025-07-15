@@ -20,30 +20,24 @@ class Toddler extends BaseController
         $this->measurementsModel = new \App\Models\MeasurementModel();
     }
 
+    // Toddlers Page
     public function index()
     {        
-        $page = $this->request->getVar('page_toddlers');
-
+        $search = $this->request->getGet('search');
+        
         $data = [
-            'title' => 'Balita',
-            'toddlers' => $this->toddlersModel->getToddlers($page),
-            'attendances' => $this->attendancesModel->findAll(),
+            'toddlers' => $this->toddlersModel->getToddlers($search),
             'pager' => $this->toddlersModel->pager->links('toddlers','toddlers_pagination'),
-
         ];
+
+        if($this->request->isAJAX()){
+            return $this->response->setJSON($data);
+        }
+
+        $data['title'] = 'Balita';
+        $data['attendances'] = $this->attendancesModel->findAll();
 
         return view('pages/toddlers', $data);
-    }
-
-    public function detail($id)
-    {      
-        $data = [
-            'title' => 'Detail Balita',
-            'data' => $this->toddlersModel->find($id),
-            'measurements' => $this->measurementsModel->getMeasurementsByToddlerId($id)
-        ];
-
-        return view('pages/detail', $data);
     }
 
     public function AddToddler()
@@ -56,11 +50,23 @@ class Toddler extends BaseController
             'no_telp' => $this->request->getVar('no-telp'),
             'description' => $this->request->getVar('description')
         ];
-
+        
         $this->toddlersModel->insert($data);
-
+        
         return redirect()->back()->with('success', 'Data balita berhasil ditambah');
         
+    }
+    
+    // Detail Page
+    public function detail($id)
+    {
+        $data = [
+            'title' => 'Detail Balita',
+            'data' => $this->toddlersModel->find($id),
+            'measurements' => $this->measurementsModel->getMeasurementsByToddlerId($id)
+        ];
+
+        return view('pages/detail', $data);
     }
 
     public function EditToddler()
@@ -68,6 +74,7 @@ class Toddler extends BaseController
         $id = $this->request->getVar('id');
         $data = [
             'name' => $this->request->getVar('name'),
+            'birth_date' => $this->request->getVar('birth-date'),
             'jenis_kelamin' => $this->request->getVar('jenis-kelamin'),
             'description' => $this->request->getVar('description'),
             'still_toddler' => ($this->request->getVar('is-toddler')) ? true : false
@@ -89,6 +96,30 @@ class Toddler extends BaseController
         $this->toddlersModel->update($id, $data);
         
         return redirect()->back()->with('success', 'Data orang tua berhasil diubah');
+    }
+
+    public function AddMeasurement()
+    {
+        $data = [
+            'toddler_id' => $this->request->getVar('toddler-id'),
+            'age' => $this->request->getVar('age'),
+            'height' => $this->request->getVar('height'),
+            'weight' => $this->request->getVar('weight'),
+            'added_by' => session()->get('user_data')['id'],
+            'head_circum' => $this->request->getVar('head_circum'),
+            'chest_size' => $this->request->getVar('chest_size'),
+            'arm_circum' => $this->request->getVar('arm_circum')
+        ];
+
+        $this->measurementsModel->insert($data);
         
+        return redirect()->back()->with('success', 'Data pengukuran berhasil ditambah');
+    }
+
+    public function EditMeasurement()
+    {
+        $this->measurementsModel->save($this->request->getVar());
+        
+        return redirect()->back()->with('success', 'Data pengukuran berhasil diubah');
     }
 }

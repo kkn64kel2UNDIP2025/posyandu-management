@@ -12,7 +12,7 @@ class MeasurementModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['toddler_id', 'age', 'height', 'weight', 'added_by', 'head_circum', 'chest_size', 'arm_circum'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -30,9 +30,9 @@ class MeasurementModel extends Model
 
     public function getMeasurementsByToddlerId($id)
     {
-        return $this->select('age, height, weight, profiles.email')
+        return $this->select('id, age, height, weight, head_circum, chest_size, arm_circum')
                     ->where('toddler_id', $id)
-                    ->join('profiles', 'profiles.id=measurements.added_by')
+                    // ->join('profiles', 'profiles.id=measurements.added_by')
                     ->orderBy('age', 'ASC')
                     ->findAll();
     }

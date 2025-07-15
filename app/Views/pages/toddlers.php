@@ -36,6 +36,36 @@
                                 Tambah Data
                             </button>
                         </div>
+                        
+                        <!-- Search Form -->
+                        <div class="my-4">
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <div class="flex-1">
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                            </svg>
+                                        </div>
+                                        <input type="text" id="search-input" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Cari berdasarkan nama balita atau orang tua..." value="<?= isset($search) ? esc($search) : '' ?>">
+                                    </div>
+                                </div>
+                                <button id="search-btn" class="px-4 py-2.5 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                    <i class="ti ti-search mr-1"></i>
+                                    Cari
+                                </button>
+                                <button id="reset-btn" class="px-4 py-2.5 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-200">
+                                    <i class="ti ti-refresh mr-1"></i>
+                                    Reset
+                                </button>
+                            </div>
+                            <?php if (isset($search) && !empty($search)): ?>
+                                <div class="mt-2 text-sm text-blue-600">
+                                    <i class="ti ti-info-circle mr-1"></i>
+                                    Menampilkan hasil pencarian untuk: "<strong><?= esc($search) ?></strong>"
+                                </div>
+                            <?php endif; ?>
+                        </div>
                         <div class="relative overflow-x-auto">
                             <!-- table -->
                             <table class="text-left w-full text-sm text-gray-900">
@@ -47,26 +77,49 @@
                                         <th scope="col" class="p-4 font-semibold">Detail</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php foreach ($toddlers as $toddler) : ?>
+                                <tbody id="toddlers-body">
+                                    <?php if (empty($toddlers)): ?>
                                         <tr>
-                                            <td class="py-4 px-2">
-                                                <h3 class="max-w-20 sm:max-w-full"><?= $toddler['name'] ?></h3>
-                                            </td>
-                                            <td class="p-4">
-                                                <p class="max-w-20 sm:max-w-full"><?= $toddler['parent_name'] ?></p>
-                                            </td>
-                                            <td class="p-4">
-                                                <h3 class=""><?= $toddler['status'] ?></h3>
-                                            </td>
-                                            <td class="p-4">
-                                                <a href="<?= base_url('/balita/') . $toddler['id'] ?>" class="py-1 text-sm sm:text-base px-3 inline-flex items-center gap-x-2 font-medium rounded-2xl border border-transparent bg-blue-400 text-white hover:bg-blue-500">Detail</a>
+                                            <td colspan="4" class="text-center py-8">
+                                                <div class="text-gray-500">
+                                                    <?php if (isset($search) && !empty($search)): ?>
+                                                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                        </svg>
+                                                        <p class="text-lg font-medium">Tidak ada hasil ditemukan</p>
+                                                        <p class="text-sm">Tidak ada balita yang sesuai dengan pencarian "<strong><?= esc($search) ?></strong>"</p>
+                                                        <button onclick="document.getElementById('reset-btn').click()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Tampilkan Semua Data</button>
+                                                    <?php else: ?>
+                                                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
+                                                        </svg>
+                                                        <p class="text-lg font-medium">Belum ada data balita</p>
+                                                        <p class="text-sm">Klik tombol "Tambah Data" untuk menambahkan balita pertama</p>
+                                                    <?php endif; ?>
+                                                </div>
                                             </td>
                                         </tr>
-                                    <?php endforeach ?>
+                                    <?php else: ?>
+                                        <?php foreach ($toddlers as $toddler) : ?>
+                                            <tr>
+                                                <td class="py-4 px-2">
+                                                    <p class="max-w-20 sm:max-w-full"><?= $toddler['name'] ?></p>
+                                                </td>
+                                                <td class="p-4">
+                                                    <p class="max-w-20 sm:max-w-full"><?= $toddler['parent_name'] ?></p>
+                                                </td>
+                                                <td class="p-4">
+                                                    <p class=""><?= $toddler['status'] ?></p>
+                                                </td>
+                                                <td class="p-4">
+                                                    <a href="<?= base_url('/balita/') . $toddler['id'] ?>" class="py-1 text-sm sm:text-base px-3 inline-flex items-center gap-x-2 font-medium rounded-2xl border border-transparent bg-blue-400 text-white hover:bg-blue-500">Detail</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
-                            <div class="mt-3 flex justify-center">
+                            <div id="pagination-container" class="mt-3 flex justify-center">
                                 <?= $pager ?>
                             </div>
                         </div>
@@ -76,7 +129,7 @@
         </div>
     </div>
 
-    <!-- Main modal -->
+    <!-- Add modal -->
     <div id="add-toddler" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md sm:max-w-lg max-h-full">
             <!-- Modal content -->
@@ -150,18 +203,224 @@
 
 <script>
     const measurementsDate = document.getElementsByClassName('measurement-date');
-
     for (const date of measurementsDate) {
-        let indDate = new Date(date.innerText);
-
-        indDate = indDate.toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        });
-
-        date.innerText = indDate;
+        toLocalDate(date);
     }
+
+    // Helper functions
+    function showLoadingState(toddlersBody) {
+        toddlersBody.innerHTML = `
+            <tr>
+                <td colspan="4" class="text-center py-8">
+                    <div class="animate-pulse">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                        </div>
+                        <p class="text-gray-500">Memuat data...</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+
+    function showErrorState(toddlersBody, message = 'Gagal memuat data') {
+        toddlersBody.innerHTML = `
+            <tr>
+                <td colspan="4" class="text-center py-8">
+                    <div class="text-red-500">
+                        <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.268 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                        <p class="text-lg font-medium">${message}</p>
+                        <p class="text-sm">Silakan coba lagi atau refresh halaman</p>
+                        <button onclick="location.reload()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Refresh Halaman</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+
+    // AJAX for pagination
+    function attachPaginationListeners() {
+        const paginationLinks = document.querySelectorAll('.paginations');
+        
+        paginationLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const url = this.href;
+                const searchQuery = document.getElementById('search-input').value;
+                
+                // Add search parameter to pagination URL if search is active
+                if (searchQuery.trim()) {
+                    const urlObj = new URL(url, window.location.origin);
+                    urlObj.searchParams.set('search', searchQuery);
+                    fetchToddlers(urlObj.toString());
+                } else {
+                    fetchToddlers(url);
+                }
+            });
+        });
+    }
+
+    function fetchToddlers(url) {
+        const toddlersBody = document.getElementById('toddlers-body');
+        const pagerContainer = document.getElementById('pagination-container');
+        
+        // Show loading state with skeleton
+        showLoadingState(toddlersBody);
+        
+        // Add timeout and better error handling
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
+        fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                },
+                signal: controller.signal
+            })
+            .then(response => {
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Use DocumentFragment for better performance
+                const fragment = document.createDocumentFragment();
+                
+                if (data.toddlers && data.toddlers.length > 0) {
+                    data.toddlers.forEach(toddler => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td class="py-4 px-2">
+                                <p class="max-w-20 sm:max-w-full">${toddler.name}</p>
+                            </td>
+                            <td class="p-4">
+                                <p class="max-w-20 sm:max-w-full">${toddler.parent_name}</p>
+                            </td>
+                            <td class="p-4">
+                                <p class="">${toddler.status}</p>
+                            </td>
+                            <td class="p-4">
+                                <a href="<?= base_url('/balita/') ?>${toddler.id}" class="py-1 text-sm sm:text-base px-3 inline-flex items-center gap-x-2 font-medium rounded-2xl border border-transparent bg-blue-400 text-white hover:bg-blue-500">Detail</a>
+                            </td>
+                        `;
+                        fragment.appendChild(row);
+                    });
+                } else {
+                    // No results found
+                    const searchQuery = document.getElementById('search-input').value;
+                    const emptyRow = document.createElement('tr');
+                    emptyRow.innerHTML = `
+                        <td colspan="4" class="text-center py-8">
+                            <div class="text-gray-500">
+                                ${searchQuery ? `
+                                    <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                    <p class="text-lg font-medium">Tidak ada hasil ditemukan</p>
+                                    <p class="text-sm">Tidak ada balita yang sesuai dengan pencarian "<strong>${searchQuery}</strong>"</p>
+                                    <button onclick="resetSearch()" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Tampilkan Semua Data</button>
+                                ` : `
+                                    <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
+                                    </svg>
+                                    <p class="text-lg font-medium">Belum ada data balita</p>
+                                    <p class="text-sm">Klik tombol "Tambah Data" untuk menambahkan balita pertama</p>
+                                `}
+                            </div>
+                        </td>
+                    `;
+                    fragment.appendChild(emptyRow);
+                }
+                
+                // Clear and append all at once for better performance
+                toddlersBody.innerHTML = '';
+                toddlersBody.appendChild(fragment);
+                
+                // Update pagination
+                pagerContainer.innerHTML = data.pager;
+                
+                // Re-attach event listeners for new pagination links
+                attachPaginationListeners();
+            })
+            .catch(error => {
+                clearTimeout(timeoutId);
+                console.error('Error:', error);
+                
+                let errorMessage = 'Gagal memuat data';
+                if (error.name === 'AbortError') {
+                    errorMessage = 'Koneksi timeout - coba lagi';
+                } else if (error.message.includes('HTTP error')) {
+                    errorMessage = 'Server error - coba lagi nanti';
+                } else if (!navigator.onLine) {
+                    errorMessage = 'Tidak ada koneksi internet';
+                }
+                
+                showErrorState(toddlersBody, errorMessage);
+            });
+    }
+
+    // Initialize pagination listeners
+    attachPaginationListeners();
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    function performSearch() {
+        const searchQuery = searchInput.value.trim();
+        const baseUrl = '<?= base_url('/balita') ?>';
+        
+        if (searchQuery) {
+            const searchUrl = `${baseUrl}?search=${encodeURIComponent(searchQuery)}`;
+            fetchToddlers(searchUrl);
+        } else {
+            // If empty search, load first page without search
+            fetchToddlers(baseUrl);
+        }
+    }
+
+    function resetSearch() {
+        searchInput.value = '';
+        const baseUrl = '<?= base_url('/balita') ?>';
+        fetchToddlers(baseUrl);
+    }
+
+    // Make resetSearch globally accessible
+    window.resetSearch = resetSearch;
+
+    // Event listeners for search
+    searchBtn.addEventListener('click', performSearch);
+    resetBtn.addEventListener('click', resetSearch);
+
+    // Search on Enter key
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch();
+        }
+    });
+
+    // Optional: Real-time search with debounce
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() {
+            const searchQuery = searchInput.value.trim();
+            if (searchQuery.length >= 3) { // Search after 3 characters
+                performSearch();
+            } else if (searchQuery.length === 0) {
+                resetSearch();
+            }
+        }, 500);
+    });
 </script>
 
 <?php $this->endSection() ?>

@@ -44,9 +44,17 @@ class ToddlersModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getToddlers($pager = 1)
+    public function getToddlers($search = null)
     {
-        return $this->select('name, parent_name, status, id' )
-                    ->paginate(6, 'toddlers', $pager);
+        $builder = $this->select('name, parent_name, status, id');
+        
+        if ($search) {
+            $builder->groupStart()
+                    ->like('LOWER(name)', strtolower($search))
+                    ->orLike('LOWER(parent_name)', strtolower($search))
+                    ->groupEnd();
+        }
+        
+        return $builder->paginate(6, 'toddlers');
     }
 }
