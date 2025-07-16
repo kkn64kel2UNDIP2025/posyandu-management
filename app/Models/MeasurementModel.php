@@ -36,4 +36,12 @@ class MeasurementModel extends Model
                     ->orderBy('age', 'ASC')
                     ->findAll();
     }
+
+    public function getTotalMeasurementsByMonth()
+    {
+        return $this->select("TO_CHAR(created_at, 'YYYY-MM') AS x, COUNT(*) AS y", false)
+                ->groupBy("TO_CHAR(created_at, 'YYYY-MM')")
+                ->orderBy("x", "ASC")
+                ->findAll();
+    }
 }

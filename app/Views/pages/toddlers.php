@@ -7,22 +7,20 @@
             <div class="card col-span-2">
                 <div class="card-body">
                     <h4 class="text-gray-900 text-lg font-semibold mb-5">Jadwal Posyandu</h4>
-                    <ul class="timeline-widget relative">
-                        <?php foreach ($attendances as $attendance): ?>
-                            <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
-                                <div class="timeline-badge-wrap flex flex-col items-center ">
-                                    <div
-                                        class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]">
-                                    </div>
-                                    <div class="timeline-badge-border block h-full w-[1px] bg-gray-300">
-                                    </div>
+                    <ul id="timeline" class="timeline-widget relative">
+                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                            <div class="timeline-badge-wrap flex flex-col items-center ">
+                                <div
+                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]">
                                 </div>
-                                <div class="timeline-desc py-[6px] px-4">
-                                    <p class="text-gray-900 measurement-date font-normal"><?= $attendance['measurement_date'] ?></p>
-                                    <p class="text-gray-500 text-sm ml-1"><?= $attendance['description'] ?></p>
+                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-300">
                                 </div>
-                            </li>
-                        <?php endforeach ?>
+                            </div>
+                            <div class="timeline-desc py-[6px] px-4">
+                                <p class="text-gray-900 measurement-date font-normal">Januari</p>
+                                <p class="text-gray-500 text-sm ml-1"></p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +34,7 @@
                                 Tambah Data
                             </button>
                         </div>
-                        
+
                         <!-- Search Form -->
                         <div class="my-4">
                             <div class="flex flex-col sm:flex-row gap-3">
@@ -44,7 +42,7 @@
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                             </svg>
                                         </div>
                                         <input type="text" id="search-input" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Cari berdasarkan nama balita atau orang tua..." value="<?= isset($search) ? esc($search) : '' ?>">
@@ -202,10 +200,29 @@
 </main>
 
 <script>
-    const measurementsDate = document.getElementsByClassName('measurement-date');
-    for (const date of measurementsDate) {
-        toLocalDate(date);
-    }
+    // Jadwal Posyandu
+    const bulan = [
+        "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
+    const timeline = document.getElementById("timeline");
+
+    bulan.forEach((namaBulan, index) => {
+
+        timeline.innerHTML += `
+      <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+        <div class="timeline-badge-wrap flex flex-col items-center">
+          <div class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]"></div>
+            <div class="timeline-badge-border block h-full w-[1px] bg-gray-300"></div>
+        </div>
+        <div class="timeline-desc py-[6px] px-4">
+          <p class="text-gray-900 measurement-date font-normal">${namaBulan}</p>
+          <p class="text-gray-500 text-sm ml-1"></p>
+        </div>
+      </li>
+    `;
+    });
 
     // Helper functions
     function showLoadingState(toddlersBody) {
@@ -243,14 +260,14 @@
     // AJAX for pagination
     function attachPaginationListeners() {
         const paginationLinks = document.querySelectorAll('.paginations');
-        
+
         paginationLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
+
                 const url = this.href;
                 const searchQuery = document.getElementById('search-input').value;
-                
+
                 // Add search parameter to pagination URL if search is active
                 if (searchQuery.trim()) {
                     const urlObj = new URL(url, window.location.origin);
@@ -266,14 +283,14 @@
     function fetchToddlers(url) {
         const toddlersBody = document.getElementById('toddlers-body');
         const pagerContainer = document.getElementById('pagination-container');
-        
+
         // Show loading state with skeleton
         showLoadingState(toddlersBody);
-        
+
         // Add timeout and better error handling
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-        
+
         fetch(url, {
                 method: 'GET',
                 headers: {
@@ -292,7 +309,7 @@
             .then(data => {
                 // Use DocumentFragment for better performance
                 const fragment = document.createDocumentFragment();
-                
+
                 if (data.toddlers && data.toddlers.length > 0) {
                     data.toddlers.forEach(toddler => {
                         const row = document.createElement('tr');
@@ -338,21 +355,21 @@
                     `;
                     fragment.appendChild(emptyRow);
                 }
-                
+
                 // Clear and append all at once for better performance
                 toddlersBody.innerHTML = '';
                 toddlersBody.appendChild(fragment);
-                
+
                 // Update pagination
                 pagerContainer.innerHTML = data.pager;
-                
+
                 // Re-attach event listeners for new pagination links
                 attachPaginationListeners();
             })
             .catch(error => {
                 clearTimeout(timeoutId);
                 console.error('Error:', error);
-                
+
                 let errorMessage = 'Gagal memuat data';
                 if (error.name === 'AbortError') {
                     errorMessage = 'Koneksi timeout - coba lagi';
@@ -361,7 +378,7 @@
                 } else if (!navigator.onLine) {
                     errorMessage = 'Tidak ada koneksi internet';
                 }
-                
+
                 showErrorState(toddlersBody, errorMessage);
             });
     }
@@ -377,7 +394,7 @@
     function performSearch() {
         const searchQuery = searchInput.value.trim();
         const baseUrl = '<?= base_url('/balita') ?>';
-        
+
         if (searchQuery) {
             const searchUrl = `${baseUrl}?search=${encodeURIComponent(searchQuery)}`;
             fetchToddlers(searchUrl);

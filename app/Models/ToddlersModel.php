@@ -57,4 +57,12 @@ class ToddlersModel extends Model
         
         return $builder->paginate(6, 'toddlers');
     }
+
+    public function getRTGroupTotal()
+    {
+        return $this->select('rt, COUNT(*) as total_warga')
+                    ->groupBy('rt')
+                    ->orderBy('rt', 'ASC')
+                    ->findAll();
+    }
 }
