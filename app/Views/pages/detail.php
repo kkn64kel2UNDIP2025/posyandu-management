@@ -90,7 +90,7 @@
                     </thead>
                     <tbody>
                         <?php $lastIndex = count($measurements) - 1 ?>
-                        <?php for ($i = $lastIndex; $i >= $lastIndex - 4; $i--) : ?>
+                        <?php for ($i = $lastIndex; $i >= 0; $i--) : ?>
                             <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                 <td scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
                                     <?= $measurements[$i]['age'] ?>
@@ -127,69 +127,28 @@
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6">
-    <div class="card p-2 col-span-2 sm:col-span-1">
+    <div class="card col-span-2 sm:col-span-1">
         <div class="card-body">
-            <h6 class="text-lg text-gray-900 font-semibold">Grafik Berat Badan</h6>
+            <h6 class="text-lg text-gray-900 font-semibold">Grafik Badan</h6>
             <?php if ($measurements) : ?>
                 <div class="max-w-full w-full bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                    <div class="p-4 md:p-6 pb-0 md:pb-0">
-                        <h5 id="last-measurement" class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2"></h5>
-                        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Berat Badan Terakhir</p>
-                    </div>
-                    <div id="weight-chart" class="px-2.5"></div>
-                    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5 p-4 md:p-6 pt-0 md:pt-0">
-                        <div class="flex justify-between items-center pt-5">
-                            <!-- Button -->
-                            <button
-                                id="dropdownDefaultButton"
-                                data-dropdown-toggle="lastDaysdropdown"
-                                data-dropdown-placement="bottom"
-                                class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
-                                type="button">
-                                Last 7 days
-                                <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
-                            </button>
-                            <!-- Dropdown menu -->
-                            <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a
-                                href="#"
-                                class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
-                                Sales Report
-                                <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
+                    <div id="weight-chart" class="px-1 py-4"></div>
                 </div>
             <?php else : ?>
                 <p class="text-gray-500 text-sm mt-2">Tidak ada data berat badan yang tersedia.</p>
             <?php endif; ?>
         </div>
     </div>
-    <div class="card p-2 col-span-2 sm:col-span-1">
+    <div class="card col-span-2 sm:col-span-1">
         <div class="card-body">
-            <h6 class="text-lg text-gray-900 font-semibold">Grafik Tinggi Badan</h6>
+            <h6 class="text-lg text-gray-900 font-semibold">Grafik Lingkar Badan</h6>
+            <?php if ($measurements) : ?>
+                <div class="max-w-full w-full bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                    <div id="circumference-chart" class="px-1 py-4"></div>
+                </div>
+            <?php else : ?>
+                <p class="text-gray-500 text-sm mt-2">Tidak ada data lingkar badan yang tersedia.</p>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -503,14 +462,15 @@
         const getYAxis = (column) => {
             const maxAge = getLastAge();
 
-            const weightData = [];
+            const yAxisData = [];
 
             for (let i = 1; i <= maxAge; i++) {
                 const entry = measurements.find(d => parseInt(d.age) === i);
-                weightData.push(entry ? parseFloat(entry[column]) : null);
+                const value = entry ? parseFloat(entry[column]) : NaN;
+                yAxisData.push(isNaN(value) ? null : value);
             }
 
-            return weightData;
+            return yAxisData;
         }
 
         const getXAxis = () => {
@@ -623,11 +583,7 @@
             }
         });
 
-        // Grafik Berat Badan
-        document.getElementById('last-measurement').innerText = getLastWeight() + ' kg';
-
-        const options = {
-            // set the labels option to true to show the labels on the X and Y axis
+        const bodyOptions = {
             xaxis: {
                 title: {
                     text: 'Umur (bulan)',
@@ -725,9 +681,123 @@
         }
 
         if (document.getElementById("weight-chart") && typeof ApexCharts !== 'undefined') {
-            const chart = new ApexCharts(document.getElementById("weight-chart"), options);
+            const chart = new ApexCharts(document.getElementById("weight-chart"), bodyOptions);
             chart.render();
         }
+
+        const circumferenceOptions = {
+            xaxis: {
+                title: {
+                    text: 'Umur (bulan)',
+                    style: {
+                        fontFamily: "Inter, sans-serif",
+                        cssClass: 'text-sm font-normal fill-gray-500 dark:fill-gray-400'
+                    }
+                },
+                show: true,
+                categories: getXAxis(),
+                labels: {
+                    show: true,
+                    style: {
+                        fontFamily: "Inter, sans-serif",
+                        cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                    }
+                },
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false,
+                },
+            },
+            yaxis: [{
+                    show: false,
+                    title: "Lingkar Kepala (cm)",
+                    labels: {
+                        formatter: (value) => value + " cm"
+                    }
+                },
+                {
+                    show: false,
+                    title: "Lingkar Dada (cm)",
+                    labels: {
+                        formatter: (value) => value + " cm"
+                    }
+                },
+                {
+                    show: false,
+                    title: "Lingkar Lengan (cm)",
+                    labels: {
+                        formatter: (value) => value + " cm"
+                    }
+                }
+            ],
+            series: [{
+                    name: "Lingkar Kepala",
+                    data: getYAxis('head_circum'),
+                    color: "#1A56DB",
+                    connectNulls: true
+                },
+                {
+                    name: "Lingkar Dada",
+                    data: getYAxis('chest_size'),
+                    color: "#10B981",
+                    connectNulls: true
+                }
+                ,
+                {
+                    name: "Lingkar Lengan",
+                    data: getYAxis('arm_circum'),
+                    color: "#F59E0B",
+                    connectNulls: true
+                }
+            ],
+            chart: {
+                sparkline: {
+                    enabled: false
+                },
+                height: "100%",
+                width: "100%",
+                type: "line",
+                fontFamily: "Inter, sans-serif",
+                dropShadow: {
+                    enabled: false,
+                },
+                toolbar: {
+                    show: false,
+                },
+                zoom: {
+                    enabled: true
+                },
+            },
+            tooltip: {
+                enabled: true,
+                x: {
+                    show: false,
+                },
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            stroke: {
+                width: 2,
+                curve: 'smooth'
+            },
+            legend: {
+                show: false
+            },
+            grid: {
+                show: false,
+            },
+            plotOptions: {
+                line: {
+                    connectNulls: true
+                }
+            }
+        }
+
+        const chart = new ApexCharts(document.getElementById("circumference-chart"), circumferenceOptions);
+        chart.render();
 
     <?php endif ?>
 </script>
