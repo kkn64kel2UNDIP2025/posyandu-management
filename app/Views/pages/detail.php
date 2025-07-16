@@ -279,13 +279,6 @@
             <!-- Modal body -->
             <form id="add-form" class="p-4 md:p-5" method="POST" action="<?= base_url('balita/tambah-pengukuran') ?>">
                 <input type="hidden" name="toddler-id" id="toddler-id" value="<?= $data['id'] ?>">
-                <div id="val-alert" class="hidden flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
-                    <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>Isi setidaknya salah satu data selain umur!</div>
-                </div>
                 <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-6">
                     <div class="sm:col-span-6">
                         <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Umur (bulan)</label>
@@ -296,22 +289,27 @@
                     <div class="sm:col-span-3">
                         <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi (cm)</label>
                         <input value="<?= ($measurements) ? end($measurements)['height'] : '' ?>" type="number" name="height" id="height" step="0.1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Tinggi badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-3">
                         <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat (kg)</label>
                         <input value="<?= ($measurements) ? end($measurements)['weight'] : '' ?>" type="number" name="weight" step="0.1" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Berat badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Kepala (cm)</label>
                         <input value="<?= ($measurements) ? end($measurements)['head_circum'] : '' ?>" type="number" name="head_circum" step="0.1" id="head_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Lingkar kepala harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Dada (cm)</label>
                         <input value="<?= ($measurements) ? end($measurements)['chest_size'] : '' ?>" type="number" name="chest_size" step="0.1" id="chest_size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Lingkar dada harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Lengan (kg)</label>
                         <input value="<?= ($measurements) ? end($measurements)['arm_circum'] : '' ?>" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Lingkar lengan harus diisi</p>
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -347,13 +345,6 @@
             <form id="edit-measurement-form" class="p-4 md:p-5" method="POST" action="<?= base_url('balita/edit-pengukuran') ?>">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="id" id="id" value="">
-                <div id="val-alert" class="hidden flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
-                    <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                    </svg>
-                    <span class="sr-only">Info</span>
-                    <div>Isi setidaknya salah satu data selain umur!</div>
-                </div>
                 <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-6">
                     <div class="sm:col-span-6">
                         <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Umur (bulan)</label>
@@ -363,22 +354,27 @@
                     <div class="sm:col-span-3">
                         <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi (cm)</label>
                         <input value="" type="number" name="height" id="height" step="0.1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Tinggi badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-3">
                         <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat Badan (kg)</label>
                         <input value="" type="number" name="weight" step="0.1" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Berat badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Kepala (cm)</label>
                         <input value="" type="number" name="head_circum" step="0.1" id="head_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Lingkar kepala harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Dada (cm)</label>
                         <input value="" type="number" name="chest_size" step="0.1" id="chest_size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Lingkar dada harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Lengan (kg)</label>
+                        <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Lengan (cm)</label>
                         <input value="" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="hidden mt-2 text-xs text-red-600">Lingkar lengan harus diisi</p>
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex gap-2 items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -442,7 +438,6 @@
     }
 
     <?php if ($measurements) : ?>
-        // Validasi input tambah data
         const measurements = <?= json_encode($measurements) ?>;
         const lastMeasurements = measurements[measurements.length - 1];
 
@@ -485,6 +480,7 @@
             return measurements.map(item => parseInt(item.age));
         }
 
+        // Validasi input tambah data
         function validationInput(e) {
             e.preventDefault();
             const dataInput = {};
@@ -527,13 +523,14 @@
                 unshowMessage('age');
             }
 
-            // Show Alert jika tidak ada data yang diisi
-            const valAlert = form.querySelector('#val-alert');
-            if (!(dataInput['weight'].value || dataInput['height'].value || dataInput['head_circum'].value || dataInput['chest_size'].value || dataInput['arm_circum'].value)) {
-                valAlert.classList.remove('hidden');
-                return false;
-            } else {
-                valAlert.classList.add('hidden');
+            const valKey = ['height', 'weight', 'head_circum', 'chest_size', 'arm_circum'];
+            for (const key of valKey) {
+                if (dataInput[key].value == '') {
+                    showMessage(key);
+                    return false;
+                } else {
+                    unshowMessage(key);
+                }
             }
 
             return true;
