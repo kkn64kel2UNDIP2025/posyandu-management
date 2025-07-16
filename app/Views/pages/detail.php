@@ -54,7 +54,7 @@
 <div class="card p-2">
     <div class="card-body">
         <div class="flex justify-between mb-4">
-            <h6 class="text-lg text-gray-900 font-semibold">Tabel Kedatangan</h6>
+            <h6 class="text-lg text-gray-900 font-semibold">Tabel Pengukuran</h6>
             <button data-modal-target="add-data" data-modal-toggle="add-data" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <i class="ti ti-table-plus text-xl mr-2"></i>
                 Tambah Data
@@ -89,31 +89,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach (array_slice($measurements, -5) as $measurement) : ?>
+                        <?php $lastIndex = count($measurements) - 1 ?>
+                        <?php for ($i = $lastIndex; $i >= $lastIndex - 4; $i--) : ?>
                             <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                 <td scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                    <?= $measurement['age'] ?>
+                                    <?= $measurements[$i]['age'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $measurement['height'] ?>
+                                    <?= $measurements[$i]['height'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $measurement['weight'] ?>
+                                    <?= $measurements[$i]['weight'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $measurement['head_circum'] ?>
+                                    <?= $measurements[$i]['head_circum'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $measurement['chest_size'] ?>
+                                    <?= $measurements[$i]['chest_size'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $measurement['arm_circum'] ?>
+                                    <?= $measurements[$i]['arm_circum'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a data-modal-target="edit-data" data-modal-toggle="edit-data" data-id="<?= $measurement['id'] ?>" class="edit-btn cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a data-modal-target="edit-data" data-modal-toggle="edit-data" data-id="<?= $measurements[$i]['id'] ?>" class="edit-btn cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endfor ?>
                     </tbody>
                 </table>
             </div>
@@ -421,10 +422,8 @@
                         <input value="" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                    </svg>
+                <button type="submit" class="text-white inline-flex gap-2 items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                     Edit Data
                 </button>
             </form>
@@ -463,7 +462,7 @@
         // Mengubah ke bentuk lokal
         toLocalDate(date);
     } else {
-        date.innerText = '-';
+        date.innerText = '-';   
     }
 
 
