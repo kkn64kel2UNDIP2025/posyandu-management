@@ -111,7 +111,8 @@
                                     <?= $measurements[$i]['arm_circum'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a data-modal-target="edit-data" data-modal-toggle="edit-data" data-id="<?= $measurements[$i]['id'] ?>" class="edit-btn cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a data-modal-target="edit-data" data-modal-toggle="edit-data" data-id="<?= $measurements[$i]['id'] ?>" class="edit-btn cursor-pointer font-medium text-blue-600 hover:underline">Edit</a>
+                                    <a data-modal-target="delete-measurement" data-modal-toggle="delete-measurement" data-id="<?= $measurements[$i]['id'] ?>" class="delete-btn cursor-pointer font-medium text-red-600 hover:underline">Hapus</a>
                                 </td>
                             </tr>
                         <?php endfor ?>
@@ -386,6 +387,35 @@
     </div>
 </div>
 
+<!-- Delete Measurement Data -->
+<div id="delete-measurement" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <form id="delete-form" action="<?= base_url('balita/hapus-pengukuran') ?>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="id" id="id" value="">
+            <div class="p-4 md:p-5 text-center">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                </svg>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus data untuk umur <span id="age-delete"></span>?</h3>
+                <button data-modal-hide="delete-measurement" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                    Iya, saya yakin
+                </button>
+                <button data-modal-hide="delete-measurement" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Tidak</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
 <script>
     // Mengubah format tanggal lahir
@@ -579,6 +609,22 @@
                 this.submit();
             }
         });
+
+        // Delete Measurement
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        const deleteForm = document.getElementById("delete-form");
+        const ageDelete = document.getElementById("age-delete");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const row = this.parentElement.parentElement;
+                const ageCell = row.querySelector("td:first-child");
+
+                ageDelete.innerText = ageCell.innerText;
+                deleteForm.querySelector("#id").value = this.dataset.id;
+            });
+        })
+
 
         const bodyOptions = {
             xaxis: {

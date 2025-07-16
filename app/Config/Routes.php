@@ -21,4 +21,5 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->put('/balita/edit-ortu', 'Toddler::EditParent');
     $routes->post('/balita/tambah-pengukuran', 'Toddler::AddMeasurement');
     $routes->put('/balita/edit-pengukuran', 'Toddler::EditMeasurement');
+$routes->delete('/balita/hapus-pengukuran', 'Toddler::DeleteMeasurement');
 });

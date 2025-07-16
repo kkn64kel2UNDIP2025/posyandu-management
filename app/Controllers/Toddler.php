@@ -122,4 +122,15 @@ class Toddler extends BaseController
         
         return redirect()->back()->with('success', 'Data pengukuran berhasil diubah');
     }
+
+    public function DeleteMeasurement()
+    {
+        $id = $this->request->getVar('id');
+        
+        if ($this->measurementsModel->delete($id)) {
+            return redirect()->back()->with('success', 'Data pengukuran berhasil dihapus');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menghapus data pengukuran');
+        }
+    }
 }
