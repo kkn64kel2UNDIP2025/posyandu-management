@@ -38,14 +38,18 @@
             <h6 class="text-lg text-gray-900 font-semibold inline-block">Informasi Orang Tua</h6>
             <i data-modal-target="edit-parent" data-modal-toggle="edit-parent" class="ti ti-edit text-2xl ml-3 text-gray-500 hover:text-gray-700 cursor-pointer"></i>
         </div>
-        <div class="grid gap-4 mb-4 w-full">
-            <div class="">
+        <div class="grid grid-cols-2 gap-4 mb-4 w-full">
+            <div class="col-span-2">
                 <p class="mb-2 text-gray-500">Nama:</p>
                 <p><?= $data['parent_name'] ?></p>
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">No Telepon: </p>
                 <p class="text-gray-900"><?= $data['no_telp'] ?></p>
+            </div>
+            <div class="">
+                <p class="mb-2 text-gray-500">RT: </p>
+                <p class="text-gray-900"><?= $data['rt'] ?></p>
             </div>
         </div>
     </div>
@@ -180,7 +184,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Balita</label>
                         <input value="<?= $data['name'] ?>" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-2 sm:col-span-1">
                         <label for="birth-date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -200,11 +204,19 @@
                             <option value="P" <?= ($data['jenis_kelamin'] == 'P') ? 'selected' : '' ?>>Perempuan</option>
                         </select>
                     </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                        <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            <option value="" disabled>Pilih Jenis Kelamin</option>
+                            <option value="normal" <?= ($data['status'] == 'normal') ? 'selected' : '' ?>>Normal</option>
+                            <option value="pendek" <?= ($data['status'] == 'pendek') ? 'selected' : '' ?>>Pendek</option>
+                            <option value="stunting" <?= ($data['status'] == 'stunting') ? 'selected' : '' ?>>Stunting</option>
+                        </select>
+                    </div>
                     <div class="col-span-2 sm:col-span-1 flex items-center space-x-2 justify-center">
                         <input <?= ($data['still_toddler'] == 't' ? 'checked' : '') ?> type="checkbox" name="is-toddler" id="is-toddler" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                         <label for="is-toddler" class="text-sm font-medium text-gray-900">Masih Balita</label>
                     </div>
-
                     <div class="col-span-2">
                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                         <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan atau deskripsi balita"><?= $data['description'] ?></textarea>
@@ -245,9 +257,13 @@
                         <label for="parent-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Orang Tua</label>
                         <input value="<?= $data['parent_name'] ?>" type="text" name="parent-name" id="parent-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
-                    <div class="col-span-2">
+                    <div>
                         <label for="no-telp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No Telp Orang Tua</label>
-                        <input value="<?= $data['no_telp'] ?>" type="text" name="no-telp" id="no-telp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                        <input value="<?= $data['no_telp'] ?>" type="text" name="no-telp" id="no-telp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                    </div>
+                    <div>
+                        <label for="rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
+                        <input value="<?= $data['no_telp'] ?>" type="number" min="1" name="rt" id="rt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

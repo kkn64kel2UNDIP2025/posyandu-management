@@ -48,6 +48,7 @@ class Toddler extends BaseController
             'birth_date' => $this->request->getVar('birth-date'),
             'parent_name' => $this->request->getVar('parent-name'),
             'no_telp' => $this->request->getVar('no-telp'),
+            'rt' => $this->request->getVar('rt'),
             'description' => $this->request->getVar('description')
         ];
         
@@ -76,6 +77,7 @@ class Toddler extends BaseController
             'name' => $this->request->getVar('name'),
             'birth_date' => $this->request->getVar('birth-date'),
             'jenis_kelamin' => $this->request->getVar('jenis-kelamin'),
+            'status' => $this->request->getVar('status'),
             'description' => $this->request->getVar('description'),
             'still_toddler' => ($this->request->getVar('is-toddler')) ? true : false
         ];
@@ -90,7 +92,8 @@ class Toddler extends BaseController
         $id = $this->request->getVar('id');
         $data = [
             'parent_name' => $this->request->getVar('parent-name'),
-            'no_telp' => $this->request->getVar('no-telp')
+            'no_telp' => $this->request->getVar('no-telp'),
+            'rt' => $this->request->getVar('rt')
         ];
         
         $this->toddlersModel->update($id, $data);

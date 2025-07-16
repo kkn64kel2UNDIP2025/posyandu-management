@@ -12,7 +12,7 @@ class ToddlersModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'jenis_kelamin', 'birth_date' ,'still_toddler', 'parent_name', 'no_telp', 'description'];
+    protected $allowedFields    = ['name', 'jenis_kelamin', 'status' , 'birth_date' ,'still_toddler', 'parent_name', 'no_telp', 'description', 'rt'];
 
     protected bool $allowEmptyInserts = true;
     protected bool $updateOnlyChanged = true;
@@ -46,7 +46,7 @@ class ToddlersModel extends Model
 
     public function getToddlers($search = null)
     {
-        $builder = $this->select('name, parent_name, status, id');
+        $builder = $this->select('id, name, parent_name, status, rt');
         
         if ($search) {
             $builder->groupStart()
