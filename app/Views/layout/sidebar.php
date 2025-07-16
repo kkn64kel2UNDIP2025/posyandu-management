@@ -28,7 +28,6 @@
                         <div class="flex items-center gap-2">
                             <i class="ti ti-chart-bar ps-2 text-2xl"></i> <span>Dashboard</span>
                         </div>
-
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -38,21 +37,6 @@
                         <div class="flex items-center gap-2">
                             <i class="ti ti-user-circle ps-2 text-2xl"></i> <span>Balita</span>
                         </div>
-                    </a>
-                </li>
-
-                <li class="text-xs font-bold mb-4 mt-8">
-                    <i class="ti ti-dots nav-small-cap-icon  text-lg hidden text-center"></i>
-                    <span class="text-xs text-gray-400 font-semibold">ALAT</span>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link gap-3 py-2.5 my-1 text-base flex items-center justify-between relative rounded-md text-gray-900 w-full"
-
-                        href="#">
-                        <div class="flex items-center gap-2">
-                            <i class="ti ti-calculator ps-2 text-2xl"></i> <span>Z-Score</span>
-                        </div>
-
                     </a>
                 </li>
 
