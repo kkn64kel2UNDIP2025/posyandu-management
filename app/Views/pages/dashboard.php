@@ -143,9 +143,9 @@
     chart_column_basic.render();
 
     // Function to get pie chart options
-    const getPieChartOptions = (seriesData, labelData) => ({
+    const getPieChartOptions = (seriesData, labelData, colors = ["#1C64F2", "#16BDCA", "#9061F9", "#F87171"]) => ({
         series: seriesData,
-        colors: ["#1C64F2", "#16BDCA", "#9061F9", "#F87171"],
+        colors: colors,
         chart: {
             height: 250,
             width: "100%",
@@ -180,16 +180,11 @@
         yaxis: {
             labels: {
                 formatter: function(value) {
-                    return value + "%";
+                    return value + " balita";
                 },
             },
         },
         xaxis: {
-            labels: {
-                formatter: function(value) {
-                    return value + "%";
-                },
-            },
             axisTicks: {
                 show: false
             },
@@ -205,7 +200,7 @@
     const statusLabelData = statusGroupTotal.map(item => item.status);
 
     if (document.getElementById("status-chart") && typeof ApexCharts !== 'undefined') {
-        const chart = new ApexCharts(document.getElementById("status-chart"), getPieChartOptions(statusSeriesData, statusLabelData));
+        const chart = new ApexCharts(document.getElementById("status-chart"), getPieChartOptions(statusSeriesData, statusLabelData, ["#3BB143", "#f87171", "#ff9800"]));
         chart.render();
     }
 
