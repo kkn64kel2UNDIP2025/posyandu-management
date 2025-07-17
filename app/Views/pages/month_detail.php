@@ -5,6 +5,7 @@
     <div class="card-body">
         <h6 class="text-lg text-gray-900 font-semibold">Informasi Balita</h6>
         <p class="mt-2 text-gray-800">Waktu: <span id="time"><?= $monthYear ?></span></p>
+        <?php if (count($measurements) > 0) : ?>
         <table class="mt-4 w-full text-sm text-left rtl:text-right text-gray-800">
             <thead class="text-xs text-gray-900 uppercase bg-gray-50">
                 <tr>
@@ -71,6 +72,9 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?php else : ?>
+        <p class="mt-4 text-gray-500">Tidak ada data pengukuran untuk bulan ini.</p>
+        <?php endif; ?>
     </div>
 </div>
 <script>

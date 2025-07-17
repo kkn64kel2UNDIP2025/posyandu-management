@@ -37,6 +37,11 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "extra": {
+        "heroku": {
+            "document-root": "public"
+        }
+    },
     "scripts": {
         "test": "phpunit"
     }
