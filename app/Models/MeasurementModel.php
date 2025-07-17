@@ -44,4 +44,16 @@ class MeasurementModel extends Model
                 ->orderBy("x", "ASC")
                 ->findAll();
     }
+
+    public function getToddlersByMonth($monthYear)
+    {
+        // Pecah jadi tahun & bulan
+        list($year, $month) = explode('-', $monthYear);
+
+        return $this->select('name, rt, jenis_kelamin, age, height, weight, head_circum, chest_size, arm_circum')
+                    ->where("EXTRACT(YEAR FROM created_at) = ", (int)$year)
+                    ->where("EXTRACT(MONTH FROM created_at) = ", (int)$month)
+                    ->join('toddlers', 'toddlers.id=measurements.toddler_id')
+                    ->findAll();
+    }
 }

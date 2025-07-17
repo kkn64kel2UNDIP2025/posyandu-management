@@ -35,9 +35,19 @@ class Toddler extends BaseController
         }
 
         $data['title'] = 'Balita';
-        $data['attendances'] = $this->attendancesModel->findAll();
+        $data['monthAttendances'] = $this->measurementsModel->getTotalMeasurementsByMonth();
 
         return view('pages/toddlers', $data);
+    }
+
+    public function MonthDetail($monthYear) {
+        $data = [
+            'title' => 'Detail Bulanan Balita',
+            'monthYear' => $monthYear,
+            'measurements' => $this->measurementsModel->getToddlersByMonth($monthYear)
+        ];
+
+        return view('pages/month_detail', $data);
     }
 
     public function AddToddler()

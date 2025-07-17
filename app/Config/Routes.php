@@ -16,6 +16,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/dashboard', 'Dashboard::index');
     $routes->get('/balita', 'Toddler::index');
     $routes->get('/balita/(:num)', 'Toddler::detail/$1');
+    $routes->get('/balita/month-detail/(:segment)', 'Toddler::MonthDetail/$1');
     $routes->post('/balita/tambah-balita', 'Toddler::AddToddler');
     $routes->put('/balita/edit-balita', 'Toddler::EditToddler');
     $routes->put('/balita/edit-ortu', 'Toddler::EditParent');

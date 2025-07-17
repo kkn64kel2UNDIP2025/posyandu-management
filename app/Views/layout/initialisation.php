@@ -15,14 +15,14 @@
     <!-- Core Css -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
     <script>
-        const toLocalDate = (date) => {
-            let indDate = new Date(date.innerText);
-
-            indDate = indDate.toLocaleDateString("id-ID", {
+        const toLocalDate = (date, options = {
                 day: "numeric",
                 month: "long",
                 year: "numeric"
-            });
+            }) => {
+            let indDate = new Date(date.innerText);
+
+            indDate = indDate.toLocaleDateString("id-ID", options);
 
             date.innerText = indDate;
         }

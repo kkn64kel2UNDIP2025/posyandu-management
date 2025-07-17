@@ -3,9 +3,9 @@
 
 <!-- Main Content -->
 <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6 items-stretch">
-    <div class="col-span-2">
-        <div class="card">
-            <div class="card-body h-full">
+    <div class="lg:col-span-2">
+        <div class="card h-full">
+            <div class="card-body">
                 <div class="flex  justify-between mb-5">
                     <h4 class="text-gray-900 text-lg font-semibold sm:mb-0 mb-2">Grafik Kedatangan</h4>
                 </div>
@@ -13,13 +13,20 @@
             </div>
         </div>
     </div>
-    <div class="col-span-1">
-        <div class="card h-full card-body">
+    
+    <div class="space-y-6 col-span-1">
+        <div class="card card-body">
+            <div class="text-gray-900">
+                <h4 class="text-lg font-semibold sm:mb-0 mb-2">Total Balita</h4>
+                <p class="text-3xl font-bold mt-2" id="total-toddlers"></p>
+            </div>
+        </div>
+        <div class="card card-body">
             <div class="">
                 <h4 class="text-gray-900 text-lg font-semibold sm:mb-0 mb-2">Grafik RT</h4>
             </div>
             <div class="card-body flex items-center justify-center">
-                    <div id="rt-chart"></div>
+                    <div id="rt-chart" class="p-0"></div>
             </div>
         </div>
     </div>
@@ -126,11 +133,15 @@
     const seriesData = perRtTotal.map(item => parseInt(item.total_warga));
     const labelData = perRtTotal.map(item => `RT ${item.rt}`);
 
+    // Mendapat total balita
+    const totalToddlers = seriesData.reduce((sum, val) => sum + val, 0);
+    document.getElementById('total-toddlers').innerText = totalToddlers;
+
     const rtChart = {
         series: seriesData,
         colors: ["#1C64F2", "#16BDCA", "#9061F9", "#F87171"],
         chart: {
-            height: 350,
+            height: 280,
             width: "100%",
             type: "pie",
         },

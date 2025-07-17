@@ -8,19 +8,22 @@
                 <div class="card-body">
                     <h4 class="text-gray-900 text-lg font-semibold mb-5">Jadwal Posyandu</h4>
                     <ul id="timeline" class="timeline-widget relative">
-                        <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
-                            <div class="timeline-badge-wrap flex flex-col items-center ">
-                                <div
-                                    class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]">
+                        <?php foreach ($monthAttendances as $monthAttendance): ?>
+                            <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
+                                <div class="timeline-badge-wrap flex flex-col items-center ">
+                                    <div
+                                        class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]">
+                                    </div>
+                                    <div class="timeline-badge-border block h-full w-[1px] bg-gray-300">
+                                    </div>
                                 </div>
-                                <div class="timeline-badge-border block h-full w-[1px] bg-gray-300">
+                                <div class="timeline-desc py-1 px-4">
+                                    <p class="text-gray-900 measurement-date font-normal month-attendances"><?= $monthAttendance['x'] ?></p>
+                                    <p class="text-gray-500 text-sm ml-1"><?= $monthAttendance['y'] ?> Balita</p>
+                                    <a href="<?= base_url('balita/month-detail/' . $monthAttendance['x']) ?>" class="text-blue-600 hover:underline text-sm ml-1">Lihat Detail</a>
                                 </div>
-                            </div>
-                            <div class="timeline-desc py-[6px] px-4">
-                                <p class="text-gray-900 measurement-date font-normal">Januari</p>
-                                <p class="text-gray-500 text-sm ml-1"></p>
-                            </div>
-                        </li>
+                            </li>
+                        <?php endforeach ?>
                     </ul>
                 </div>
             </div>
@@ -204,29 +207,14 @@
 </main>
 
 <script>
-    // Jadwal Posyandu
-    const bulan = [
-        "Februari", "Maret", "April", "Mei", "Juni",
-        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
+    const monthAttendances = document.getElementsByClassName('month-attendances');
 
-    const timeline = document.getElementById("timeline");
-
-    bulan.forEach((namaBulan, index) => {
-
-        timeline.innerHTML += `
-      <li class="timeline-item flex relative overflow-hidden min-h-[70px]">
-        <div class="timeline-badge-wrap flex flex-col items-center">
-          <div class="timeline-badge w-3 h-3 rounded-full shrink-0 bg-transparent border-2 border-blue-600 my-[10px]"></div>
-            <div class="timeline-badge-border block h-full w-[1px] bg-gray-300"></div>
-        </div>
-        <div class="timeline-desc py-[6px] px-4">
-          <p class="text-gray-900 measurement-date font-normal">${namaBulan}</p>
-          <p class="text-gray-500 text-sm ml-1"></p>
-        </div>
-      </li>
-    `;
-    });
+    for (const monthAttendance of monthAttendances) {
+        toLocalDate(monthAttendance, {
+            month: "long",
+            year: "numeric"
+        });
+    }
 
     // Helper functions
     function showLoadingState(toddlersBody) {

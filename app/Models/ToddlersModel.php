@@ -61,6 +61,7 @@ class ToddlersModel extends Model
     public function getRTGroupTotal()
     {
         return $this->select('rt, COUNT(*) as total_warga')
+                    ->where('still_toddler', true)
                     ->groupBy('rt')
                     ->orderBy('rt', 'ASC')
                     ->findAll();
