@@ -10,7 +10,7 @@
         <div class="grid grid-cols-2 gap-4 w-full mb-8">
             <div class="col-span-2">
                 <p class="mb-2 text-gray-500">Nama:</p>
-                <p><?= $data['name'] ?></p>
+                <p id="name-toddler"><?= $data['name'] ?></p>
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">Jenis Kelamin</p>
@@ -57,16 +57,37 @@
 
 <div class="card p-2">
     <div class="card-body">
-        <div class="flex justify-between mb-4">
+        <div class="flex sm:flex-row flex-col sm:gap-0 gap-3 justify-between mb-4">
             <h6 class="text-lg text-gray-900 font-semibold">Tabel Pengukuran</h6>
-            <button data-modal-target="add-data" data-modal-toggle="add-data" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <i class="ti ti-table-plus text-xl mr-2"></i>
-                Tambah Data
-            </button>
+            <div class="flex gap-4">
+                <button data-modal-target="add-data" data-modal-toggle="add-data" class="gap-1.5 text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-3 py-2 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-table-plus">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12.5 21h-7.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7.5" />
+                        <path d="M3 10h18" />
+                        <path d="M10 3v18" />
+                        <path d="M16 19h6" />
+                        <path d="M19 16v6" />
+                    </svg>
+                    <span class="text-sm font-semibold my-auto">Tambah</span>
+                </button>
+                <button onclick="exportToExcel()" type="button" class="cursor-pointer bg-green-600 text-white px-3 py-2 rounded-xl flex gap-1 hover:bg-green-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-xls">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                        <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" />
+                        <path d="M4 15l4 6" />
+                        <path d="M4 21l4 -6" />
+                        <path d="M17 20.25c0 .414 .336 .75 .75 .75h1.25a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-1a1 1 0 0 1 -1 -1v-1a1 1 0 0 1 1 -1h1.25a.75 .75 0 0 1 .75 .75" />
+                        <path d="M11 15v6h3" />
+                    </svg>
+                    <span class="text-sm font-semibold my-auto">Unduh</span>
+                </button>
+            </div>
         </div>
         <?php if ($measurements) :  ?>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm rtl:text-right text-gray-900 text-center">
+                <table id="measurements-table" class="w-full text-sm rtl:text-right text-gray-900 text-center">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -192,7 +213,7 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                 </svg>
                             </div>
-                            <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>"  id="birth-date-edit" name="birth-date" value="" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                            <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>" id="birth-date-edit" name="birth-date" value="" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
 
                         </div>
                     </div>
@@ -395,7 +416,12 @@
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex gap-2 items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                        <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                        <path d="M16 5l3 3" />
+                    </svg>
                     Edit Data
                 </button>
             </form>
@@ -407,25 +433,25 @@
 <div id="delete-measurement" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete-measurement">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
                 <span class="sr-only">Close modal</span>
             </button>
             <form id="delete-form" action="<?= base_url('balita/hapus-pengukuran') ?>" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="id" id="id" value="">
-            <div class="p-4 md:p-5 text-center">
-                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                </svg>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus data untuk umur <span id="age-delete"></span>?</h3>
-                <button data-modal-hide="delete-measurement" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                    Iya, saya yakin
-                </button>
-                <button data-modal-hide="delete-measurement" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Tidak</button>
-            </div>
+                <div class="p-4 md:p-5 text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus data untuk umur <span id="age-delete"></span>?</h3>
+                    <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                        Iya, saya yakin
+                    </button>
+                    <button data-modal-hide="delete-measurement" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Tidak</button>
+                </div>
             </form>
         </div>
     </div>
@@ -433,6 +459,7 @@
 
 
 <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
     // Mengubah format tanggal lahir
     const date = document.getElementById('birth-date');
@@ -463,7 +490,7 @@
         // Mengubah ke bentuk lokal
         toLocalDate(date);
     } else {
-        date.innerText = '-';   
+        date.innerText = '-';
     }
 
 
@@ -484,6 +511,21 @@
     }
 
     <?php if ($measurements) : ?>
+        // Fungsi untuk mengunduh data sebagai file XLSX
+        const nameToddler = document.getElementById('name-toddler');
+
+        function exportToExcel() {
+            const table = document.getElementById("measurements-table");
+            let clonedTable = table.cloneNode(true);
+
+            // Hapus kolom "Action" dari setiap row
+            [...clonedTable.rows].forEach(row => row.deleteCell(6));
+            const wb = XLSX.utils.table_to_book(clonedTable, {
+                sheet: "Data Pengukuran Balita"
+            });
+            XLSX.writeFile(wb, "data_balita_" + nameToddler.innerText.replace(/\s+/g, "_").toLowerCase() + ".xlsx");
+        }
+
         const measurements = <?= json_encode($measurements) ?>;
         const lastMeasurements = measurements[measurements.length - 1];
 
@@ -802,8 +844,7 @@
                     data: getYAxis('chest_size'),
                     color: "#10B981",
                     connectNulls: true
-                }
-                ,
+                },
                 {
                     name: "Lingkar Lengan",
                     data: getYAxis('arm_circum'),

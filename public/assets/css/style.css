@@ -24,6 +24,7 @@
     --color-green-300: #6EE7B7;
     --color-green-500: #10B981;
     --color-green-600: #059669;
+    --color-green-700: #047857;
     --color-green-800: #065F46;
     --color-green-900: #064E3B;
     --color-teal-400: #2DD4BF;
@@ -495,6 +496,9 @@
   }
   .my-\[10px\] {
     margin-block: 10px;
+  }
+  .my-auto {
+    margin-block: auto;
   }
   .-ms-1 {
     margin-inline-start: calc(var(--spacing) * -1);
@@ -1226,6 +1230,9 @@
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -2675,6 +2682,13 @@
       }
     }
   }
+  .hover\:bg-green-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-green-700);
+      }
+    }
+  }
   .hover\:bg-red-800 {
     &:hover {
       @media (hover: hover) {
@@ -2949,9 +2963,19 @@
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
   }
+  .sm\:flex-col {
+    @media (width >= 40rem) {
+      flex-direction: column;
+    }
+  }
   .sm\:flex-row {
     @media (width >= 40rem) {
       flex-direction: row;
+    }
+  }
+  .sm\:gap-0 {
+    @media (width >= 40rem) {
+      gap: calc(var(--spacing) * 0);
     }
   }
   .sm\:rounded-lg {
