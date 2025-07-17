@@ -42,7 +42,7 @@ class Toddler extends BaseController
 
     public function MonthDetail($monthYear) {
         $data = [
-            'title' => 'Detail Bulanan Balita',
+            'title' => 'Detail Bulanan',
             'monthYear' => $monthYear,
             'measurements' => $this->measurementsModel->getToddlersByMonth($monthYear)
         ];

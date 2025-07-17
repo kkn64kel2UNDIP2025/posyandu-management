@@ -75,7 +75,7 @@
                                         <th scope="col" class="py-4 px-2 font-semibold max-w-20 sm:max-w-full">Nama</th>
                                         <th scope="col" class="p-4 font-semibold max-w-20 sm:max-w-full">Orang Tua</th>
                                         <th scope="col" class="p-4 font-semibold">Status</th>
-                                        <th scope="col" class="p-4 font-semibold">Detail</th>
+                                        <th scope="col" class="p-4 font-semibold">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="toddlers-body">
@@ -113,7 +113,7 @@
                                                     <p class=""><?= $toddler['status'] ?></p>
                                                 </td>
                                                 <td class="p-4">
-                                                    <a href="<?= base_url('/balita/') . $toddler['id'] ?>" class="py-1 text-sm sm:text-base px-3 inline-flex items-center gap-x-2 font-medium rounded-2xl border border-transparent bg-blue-400 text-white hover:bg-blue-500">Detail</a>
+                                                    <a href="<?= base_url('/balita/') . $toddler['id'] ?>" class="cursor-pointer font-medium text-blue-600 hover:underline">Detail</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach ?>
@@ -148,11 +148,12 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" method="POST" action="<?= base_url('balita/tambah-balita') ?>">
+                <form id="add-form" novalidate class="p-4 md:p-5" method="POST" action="<?= base_url('balita/tambah-balita') ?>">
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Balita</label>
-                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                            <p class="text-red-500 text-sm hidden">Nama balita harus diisi</p>
                         </div>
 
                         <div class="sm:col-span-1 col-span-2">
@@ -173,20 +174,24 @@
                                     </svg>
                                 </div>
                                 <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>" id="birth-date" required name="birth-date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                <p class="absolute text-red-500 text-sm hidden">Tanggal lahir harus diisi</p>
                             </div>
                         </div>
 
                         <div class="col-span-2">
                             <label for="parent-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Orang Tua</label>
                             <input type="text" name="parent-name" id="parent-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                            <p class="text-red-500 text-sm hidden">Nama orang tua harus diisi</p>
                         </div>
                         <div class="col-span-1">
                             <label for="no-telp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No Telp Orang Tua</label>
                             <input type="text" name="no-telp" id="no-telp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                            <p class="text-red-500 text-sm hidden">No Telp harus valid</p>
                         </div>
                         <div class="col-span-1">
                             <label for="rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
-                            <input type="number" min="1" name="rt" id="rt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                            <input type="number" min="1" name="rt" id="rt" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                            <p class="text-red-500 text-sm hidden">RT harus diisi</p>
                         </div>
                         <div class="col-span-2">
                             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
@@ -206,7 +211,7 @@
 
 </main>
 
-<script>
+<script type="module">
     const monthAttendances = document.getElementsByClassName('month-attendances');
 
     for (const monthAttendance of monthAttendances) {
@@ -215,6 +220,29 @@
             year: "numeric"
         });
     }
+
+    // Validation for form inputs
+    import { validationInput } from '<?= base_url('assets/js/validation.js') ?>';
+
+    const addForm = document.getElementById('add-form');
+    addForm.addEventListener('submit', (e) => {
+        const telpInput = document.getElementById('no-telp');
+        // Validate phone number format
+        const validationEl = telpInput.nextElementSibling;
+        let isValid = true;
+        
+        if (telpInput.value && !/^\d{10,15}$/.test(telpInput.value)) {
+            validationEl.classList.remove('hidden');
+            isValid = false;
+        } else {
+            validationEl.classList.add('hidden');
+            isValid = true;
+        }
+
+        if (validationInput(e) && isValid) {
+            addForm.submit();
+        }
+    });
 
     // Helper functions
     function showLoadingState(toddlersBody) {
@@ -316,7 +344,7 @@
                                 <p class="">${toddler.status}</p>
                             </td>
                             <td class="p-4">
-                                <a href="<?= base_url('/balita/') ?>${toddler.id}" class="py-1 text-sm sm:text-base px-3 inline-flex items-center gap-x-2 font-medium rounded-2xl border border-transparent bg-blue-400 text-white hover:bg-blue-500">Detail</a>
+                                <a href="<?= base_url('/balita/') ?>${toddler.id}" class="cursor-pointer font-medium text-blue-600 hover:underline">Detail</a>
                             </td>
                         `;
                         fragment.appendChild(row);

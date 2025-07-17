@@ -161,7 +161,7 @@
                     <div id="weight-chart" class="px-1 py-4"></div>
                 </div>
             <?php else : ?>
-                <p class="text-gray-500 text-sm mt-2">Tidak ada data berat badan yang tersedia.</p>
+                <p class="text-gray-500 text-sm mt-2">Tidak ada data badan yang tersedia.</p>
             <?php endif; ?>
         </div>
     </div>
@@ -213,7 +213,7 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                 </svg>
                             </div>
-                            <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>" id="birth-date-edit" name="birth-date" value="" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                            <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>" required id="birth-date-edit" name="birth-date" value="" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date">
 
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                     </div>
                     <div>
                         <label for="rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
-                        <input value="<?= $data['no_telp'] ?>" type="number" min="1" name="rt" id="rt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                        <input value="<?= $data['rt'] ?>" type="number" min="1" name="rt" id="rt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

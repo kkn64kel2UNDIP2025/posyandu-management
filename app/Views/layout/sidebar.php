@@ -7,14 +7,16 @@
 
         <a href="../" class="text-nowrap">
             <img
-                src="<?= base_url() ?>/assets/images/logos/logo-light.svg"
-                alt="Logo-Dark" />
+                src="<?= base_url() ?>/assets/images/logos/logo-SiPanda-nobg.png"
+                alt="Logo-Dark"
+                width="175"
+                class="mx-auto"
+            />
         </a>
-
 
     </div>
     <div class="scroll-sidebar" data-simplebar="">
-        <nav class=" w-full flex flex-col sidebar-nav px-4 mt-5">
+        <nav class="w-full flex flex-col sidebar-nav px-4">
             <ul id="sidebarnav" class="text-gray-600 text-sm">
                 <li class="text-xs font-bold pb-[5px]">
                     <i class="ti ti-dots nav-small-cap-icon text-lg hidden text-center"></i>

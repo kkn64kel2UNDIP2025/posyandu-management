@@ -8,12 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/images/logos/favicon.png') ?>" />
+  <link rel="shortcut icon" type="image/png" href="<?= base_url('assets/images/logos/logo-SiPanda.jpg') ?>" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <!-- Core Css -->
-  <title>Login | Posyandu</title>
+  <title>Login | Si Panda</title>
   <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" />
 </head>
 
@@ -24,8 +24,7 @@
 
       <div class="justify-center items-center w-full card lg:flex max-w-md ">
         <div class=" w-full card-body">
-          <a href="../" class="py-4 block"><img src="<?= base_url('assets/images/logos/logo-light.svg') ?>" alt="" class="mx-auto" /></a>
-          <p class="mb-4 text-gray-400 text-sm text-center">Your Social Campaigns</p>
+          <a href="../" class="block"><img width="175" src="<?= base_url('assets/images/logos/logo-SiPanda-nobg.png') ?>" alt="logo Si Panda" class="mx-auto"/></a>
           <?php if (session('error')) : ?>
             <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800" role="alert">
               <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
