@@ -63,7 +63,22 @@ class ToddlersModel extends Model
         return $this->select('rt, COUNT(*) as total_warga')
                     ->where('still_toddler', true)
                     ->groupBy('rt')
-                    ->orderBy('rt', 'ASC')
+                    ->findAll();
+    }
+
+    public function getGenderGroupTotal()
+    {
+        return $this->select('jenis_kelamin, COUNT(*) as toddler_count')
+                    ->where('still_toddler', true)
+                    ->groupBy('jenis_kelamin')
+                    ->findAll();
+    }
+
+    public function getStatusGroupTotal()
+    {
+        return $this->select('status, COUNT(*) as toddler_count')
+                    ->where('still_toddler', true)
+                    ->groupBy('status')
                     ->findAll();
     }
 }

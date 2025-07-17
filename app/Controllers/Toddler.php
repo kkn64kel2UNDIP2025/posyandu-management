@@ -10,13 +10,11 @@ use Config\App;
 class Toddler extends BaseController
 {
     protected $toddlersModel;
-    protected $attendancesModel;
     protected $measurementsModel;
 
     public function __construct()
     {
         $this->toddlersModel = new \App\Models\ToddlersModel();
-        $this->attendancesModel = new \App\Models\AttendanceModel();
         $this->measurementsModel = new \App\Models\MeasurementModel();
     }
 

@@ -21,8 +21,12 @@ class Dashboard extends BaseController
         $data = [
             'title' => 'Dashboard',
             'measurementTotal' => $this->measurementsModel->getTotalMeasurementsByMonth(),
-            'perRtTotal' => $this->toddlersModel->getRTGroupTotal()
+            'perRtTotal' => $this->toddlersModel->getRTGroupTotal(),
+            'genderGroupTotal' => $this->toddlersModel->getGenderGroupTotal(),
+            'statusGroupTotal' => $this->toddlersModel->getStatusGroupTotal(),
         ];
+
+        // dd($data); // Debugging line, remove in production
 
         return view('pages/dashboard', $data);
     }

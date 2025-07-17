@@ -3,30 +3,48 @@
 
 <!-- Main Content -->
 <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6 items-stretch">
-    <div class="lg:col-span-2">
-        <div class="card h-full">
+    <div class="lg:col-span-2 space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="card card-body">
+                <div class="text-gray-900">
+                    <h4 class="text-lg font-semibold sm:mb-0 mb-2">Total Balita</h4>
+                    <p class="text-3xl font-bold mt-2" id="total-toddlers"><?= $genderGroupTotal[0]['toddler_count'] + $genderGroupTotal[1]['toddler_count'] ?></p>
+                </div>
+            </div>
+            <div class="card card-body">
+                <div class="text-gray-900">
+                    <h4 class="text-lg font-semibold sm:mb-0 mb-2">Balita Laki-laki</h4>
+                    <p class="text-3xl font-bold mt-2" id="male-toddlers"><?= $genderGroupTotal[1]['toddler_count'] ?></p>
+                </div>
+            </div>
+            <div class="card card-body">
+                <div class="text-gray-900">
+                    <h4 class="text-lg font-semibold sm:mb-0 mb-2">Balita Perempuan</h4>
+                    <p class="text-3xl font-bold mt-2" id="female-toddlers"><?= $genderGroupTotal[0]['toddler_count'] ?></p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
             <div class="card-body">
-                <div class="flex  justify-between mb-5">
+                <div>
                     <h4 class="text-gray-900 text-lg font-semibold sm:mb-0 mb-2">Grafik Kedatangan</h4>
                 </div>
                 <div id="measurement-total"></div>
             </div>
         </div>
     </div>
-    
+
     <div class="space-y-6 col-span-1">
         <div class="card card-body">
-            <div class="text-gray-900">
-                <h4 class="text-lg font-semibold sm:mb-0 mb-2">Total Balita</h4>
-                <p class="text-3xl font-bold mt-2" id="total-toddlers"></p>
+            <h4 class="text-gray-900 text-lg font-semibold sm:mb-0 mb-2">Status Balita</h4>
+            <div class="flex items-center justify-center">
+                <div id="status-chart" class="p-0"></div>
             </div>
         </div>
         <div class="card card-body">
-            <div class="">
-                <h4 class="text-gray-900 text-lg font-semibold sm:mb-0 mb-2">Grafik RT</h4>
-            </div>
-            <div class="card-body flex items-center justify-center">
-                    <div id="rt-chart" class="p-0"></div>
+            <h4 class="text-gray-900 text-lg font-semibold sm:mb-0 mb-2">Balita per RT</h4>
+            <div class="flex items-center justify-center">
+                <div id="rt-chart" class="p-0"></div>
             </div>
         </div>
     </div>
@@ -42,7 +60,6 @@
 <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
 <script>
     const measurementTotal = <?= json_encode($measurementTotal) ?>;
-    console.log(measurementTotal);
 
     const measurementOption = {
         series: [{
@@ -52,7 +69,7 @@
         chart: {
             fontFamily: "Poppins,sans-serif",
             type: "bar",
-            height: 370,
+            height: 442,
             offsetY: 10,
             toolbar: {
                 show: false,
@@ -125,23 +142,12 @@
     const chart_column_basic = new ApexCharts(document.querySelector("#measurement-total"), measurementOption);
     chart_column_basic.render();
 
-
-    // RT Chart
-    const perRtTotal = <?= json_encode($perRtTotal) ?>;
-
-    // Konversi jadi array
-    const seriesData = perRtTotal.map(item => parseInt(item.total_warga));
-    const labelData = perRtTotal.map(item => `RT ${item.rt}`);
-
-    // Mendapat total balita
-    const totalToddlers = seriesData.reduce((sum, val) => sum + val, 0);
-    document.getElementById('total-toddlers').innerText = totalToddlers;
-
-    const rtChart = {
+    // Function to get pie chart options
+    const getPieChartOptions = (seriesData, labelData) => ({
         series: seriesData,
         colors: ["#1C64F2", "#16BDCA", "#9061F9", "#F87171"],
         chart: {
-            height: 280,
+            height: 250,
             width: "100%",
             type: "pie",
         },
@@ -191,10 +197,26 @@
                 show: false
             },
         },
-    };
+    });
+
+    // Status Chart
+    const statusGroupTotal = <?= json_encode($statusGroupTotal) ?>;
+    const statusSeriesData = statusGroupTotal.map(item => parseInt(item.toddler_count));
+    const statusLabelData = statusGroupTotal.map(item => item.status);
+
+    if (document.getElementById("status-chart") && typeof ApexCharts !== 'undefined') {
+        const chart = new ApexCharts(document.getElementById("status-chart"), getPieChartOptions(statusSeriesData, statusLabelData));
+        chart.render();
+    }
+
+    // RT Chart
+    const perRtTotal = <?= json_encode($perRtTotal) ?>;
+
+    const seriesData = perRtTotal.map(item => parseInt(item.total_warga));
+    const labelData = perRtTotal.map(item => `RT ${item.rt}`);
 
     if (document.getElementById("rt-chart") && typeof ApexCharts !== 'undefined') {
-        const chart = new ApexCharts(document.getElementById("rt-chart"), rtChart);
+        const chart = new ApexCharts(document.getElementById("rt-chart"), getPieChartOptions(seriesData, labelData));
         chart.render();
     }
 </script>
