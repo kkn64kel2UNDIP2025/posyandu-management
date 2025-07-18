@@ -14,7 +14,7 @@
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">Jenis Kelamin</p>
-                <p class="text-gray-900" id="gender"><?= $data['jenis_kelamin'] ?></p>
+                <p class="text-gray-900" id="gender"></p>
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">Tanggal Lahir: </p>
@@ -26,7 +26,7 @@
             </div>
             <div class="">
                 <p class="mb-2 text-gray-500">Masih Balita: </p>
-                <p id="is-toddler" class="text-gray-900"><?= $data['still_toddler'] ?></p>
+                <p id="is-toddler" class="text-gray-900"></p>
             </div>
             <div class="col-span-2">
                 <p class="mb-2 text-gray-500">Deskripsi:</p>
@@ -71,7 +71,7 @@
                     </svg>
                     <span class="text-sm font-semibold my-auto">Tambah</span>
                 </button>
-                <button onclick="exportToExcel()" type="button" class="cursor-pointer bg-green-600 text-white px-3 py-2 rounded-xl flex gap-1 hover:bg-green-700">
+                <button type="button" id="export-button" class="cursor-pointer bg-green-600 text-white px-3 py-2 rounded-xl flex gap-1 hover:bg-green-700">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-type-xls">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M14 3v4a1 1 0 0 0 1 1h4" />
@@ -155,7 +155,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6">
     <div class="card col-span-2 sm:col-span-1">
         <div class="card-body">
-            <h6 class="text-lg text-gray-900 font-semibold">Grafik Badan</h6>
+            <h6 class="text-lg text-gray-900 font-semibold mb-4">Grafik Badan</h6>
             <?php if ($measurements) : ?>
                 <div class="max-w-full w-full bg-white rounded-lg shadow-sm">
                     <div id="weight-chart" class="px-1 py-4"></div>
@@ -167,7 +167,7 @@
     </div>
     <div class="card col-span-2 sm:col-span-1">
         <div class="card-body">
-            <h6 class="text-lg text-gray-900 font-semibold">Grafik Lingkar Badan</h6>
+            <h6 class="text-lg text-gray-900 font-semibold mb-4">Grafik Lingkar Badan</h6>
             <?php if ($measurements) : ?>
                 <div class="max-w-full w-full bg-white rounded-lg shadow-sm">
                     <div id="circumference-chart" class="px-1 py-4"></div>
@@ -197,13 +197,14 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5" method="POST" action="<?= base_url('balita/edit-balita') ?>">
+            <form novalidate id="edit-toddler-form" class="p-4 md:p-5" method="POST" action="<?= base_url('balita/edit-balita') ?>">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" value="<?= $data['id'] ?>" name="id">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nama Balita</label>
                         <input value="<?= $data['name'] ?>" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                        <p class="text-red-500 text-sm hidden">Nama balita harus diisi.</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="birth-date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Lahir</label>
@@ -214,7 +215,7 @@
                                 </svg>
                             </div>
                             <input datepicker datepicker-max-date="<?= date('m/d/Y') ?>" required id="birth-date-edit" name="birth-date" value="" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date">
-
+                            <p class="text-red-500 text-sm hidden">Tanggal lahir harus diisi.</p>
                         </div>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
@@ -234,7 +235,7 @@
                             <option value="stunting" <?= ($data['status'] == 'stunting') ? 'selected' : '' ?>>Stunting</option>
                         </select>
                     </div>
-                    <div class="col-span-2 sm:col-span-1 flex items-center space-x-2 justify-center">
+                    <div class="col-span-2 sm:col-span-1 flex items-center space-x-2 sm:justify-center">
                         <input <?= ($data['still_toddler'] == 't' ? 'checked' : '') ?> type="checkbox" name="is-toddler" id="is-toddler" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                         <label for="is-toddler" class="text-sm font-medium text-gray-900">Masih Balita</label>
                     </div>
@@ -270,21 +271,24 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5" method="POST" action="<?= base_url('balita/edit-ortu') ?>">
+            <form novalidate id="edit-parent-form" class="p-4 md:p-5" method="POST" action="<?= base_url('balita/edit-ortu') ?>">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" value="<?= $data['id'] ?>" name="id">
-                <div class="grid gap-4 mb-4 grid-cols-2">
-                    <div class="col-span-2">
+                <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-2">
+                    <div class="col-span-1 sm:col-span-2">
                         <label for="parent-name" class="block mb-2 text-sm font-medium text-gray-900">Nama Orang Tua</label>
                         <input value="<?= $data['parent_name'] ?>" type="text" name="parent-name" id="parent-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                        <p class="text-red-500 text-sm hidden">Nama orang tua harus diisi.</p>
                     </div>
                     <div>
                         <label for="no-telp" class="block mb-2 text-sm font-medium text-gray-900">No Telp Orang Tua</label>
                         <input value="<?= $data['no_telp'] ?>" type="text" name="no-telp" id="no-telp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                        <p class="text-red-500 text-sm hidden">No telp harus valid.</p>
                     </div>
                     <div>
                         <label for="rt" class="block mb-2 text-sm font-medium text-gray-900">RT</label>
                         <input value="<?= $data['rt'] ?>" type="number" min="1" name="rt" id="rt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
+                        <p class="text-red-500 text-sm hidden">RT harus diisi.</p>
                     </div>
                 </div>
                 <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
@@ -460,7 +464,7 @@
 
 <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script>
+<script type="module">
     // Mengubah format tanggal lahir
     const date = document.getElementById('birth-date');
 
@@ -498,17 +502,51 @@
     const gender = document.getElementById('gender');
     const isToddler = document.getElementById('is-toddler');
 
-    if (gender.innerText == 'P') {
+    if ('<?= $data['jenis_kelamin'] ?>' == 'P') {
         gender.innerText = 'Perempuan';
     } else {
         gender.innerText = 'Laki-laki';
     }
 
-    if (isToddler.innerText == 't') {
+    if ('<?= $data['still_toddler'] ?>' == 't') {
         isToddler.innerText = 'iya';
     } else {
         isToddler.innerText = 'tidak';
     }
+    // Validasi
+    import {
+        validationInput
+    } from '<?= base_url('assets/js/validation.js') ?>';
+
+    // Validasi Edit Balita
+    const editToddlerForm = document.getElementById('edit-toddler-form');
+    editToddlerForm.addEventListener('submit', function(e) {
+        if(validationInput(e)) {
+            this.submit();
+        }
+    });
+
+    // Validasi Edit Orang Tua
+    const editParentForm = document.getElementById('edit-parent-form');
+    editParentForm.addEventListener('submit', function(e) {
+        // Validate phone number format
+        const telpInput = document.getElementById('no-telp');
+        const validationEl = telpInput.nextElementSibling;
+        let isValid = true;
+
+        isValid = validationInput(e);
+
+        if (telpInput.value && !/^\d{10,15}$/.test(telpInput.value)) {
+            validationEl.classList.remove('hidden');
+            isValid = false;
+        } else {
+            validationEl.classList.add('hidden');
+        }
+
+        if (isValid) {
+            editParentForm.submit();
+        }
+    });
 
     <?php if ($measurements) : ?>
         // Fungsi untuk mengunduh data sebagai file XLSX
@@ -525,6 +563,8 @@
             });
             XLSX.writeFile(wb, "data_balita_" + nameToddler.innerText.replace(/\s+/g, "_").toLowerCase() + ".xlsx");
         }
+
+        document.getElementById("export-button").addEventListener("click", exportToExcel);
 
         const measurements = <?= json_encode($measurements) ?>;
         const lastMeasurements = measurements[measurements.length - 1];
@@ -569,7 +609,7 @@
         }
 
         // Validasi input tambah data
-        function validationInput(e) {
+        function validationInput2(e) {
             e.preventDefault();
             const dataInput = {};
             const form = e.target;
@@ -589,12 +629,6 @@
 
             const unshowMessage = ((name) => {
                 dataInput[name].nextElementSibling.classList.add('hidden');
-            })
-
-            const unshowAllMessage = (() => {
-                inputForm.forEach(input => {
-                    input.nextElementSibling.classList.add('hidden');
-                });
             })
 
             const allAges = getAllAges();
@@ -626,7 +660,7 @@
 
         const addForm = document.getElementById('add-form');
         addForm.addEventListener('submit', function(e) {
-            if (validationInput(e)) {
+            if (validationInput2(e)) {
                 this.submit();
             }
         });
@@ -650,7 +684,6 @@
                 const armCircum = cells[5].innerText;
                 const id = this.dataset.id;
 
-                editMeasurementForm.querySelector("#id").value = id;
                 editMeasurementForm.querySelector("#age").value = age;
                 editMeasurementForm.querySelector("#height").value = height;
                 editMeasurementForm.querySelector("#weight").value = weight;
@@ -662,7 +695,7 @@
         });
 
         editMeasurementForm.addEventListener('submit', function(e) {
-            if (validationInput(e)) {
+            if (validationInput2(e)) {
                 this.querySelector("#age").disabled = false;
                 this.submit();
             }
