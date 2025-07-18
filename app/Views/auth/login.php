@@ -24,7 +24,7 @@
 
       <div class="justify-center items-center w-full card lg:flex max-w-md ">
         <div class=" w-full card-body">
-          <a href="../" class="block"><img width="175" src="<?= base_url('assets/images/logos/logo-SiPanda-nobg.png') ?>" alt="logo Si Panda" class="mx-auto"/></a>
+          <a href="../" class="block"><img width="175" src="<?= base_url('assets/images/logos/logo-SiPanda-nobg.png') ?>" alt="logo Si Panda" class="mx-auto" /></a>
           <?php if (session('error')) : ?>
             <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50" role="alert">
               <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -35,13 +35,15 @@
             </div>
           <?php endif ?>
           <!-- form -->
-          <form method="post" action="<?= base_url('/login') ?>">
+          <form id="login-form" method="post" novalidate action="<?= base_url('/login') ?>">
             <!-- username -->
             <div class="mb-4">
               <label for="email"
                 class="block mb-2 text-sm font-medium text-gray-900">Email</label>
               <input type="text" id="email" name="email" value="<?= old('email') ?>" required
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" aria-describedby="hs-input-helper-text">
+              <p class="text-red-500 text-sm hidden">Email harus diisi</p>
+
             </div>
             <!-- password -->
             <div class="mb-6">
@@ -49,6 +51,7 @@
                 class="block mb-2 text-sm font-medium text-gray-900">Password</label>
               <input type="password" id="password" name="password" required
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" aria-describedby="hs-input-helper-text">
+              <p class="text-red-500 text-sm hidden">Password harus diisi</p>
             </div>
             <!-- checkbox -->
             <!-- button -->
@@ -64,7 +67,18 @@
     <!--end of project-->
   </main>
 
-  <script src="<?= base_url('assets/libs/jquery/dist/jquery.min.js') ?>"></script>
+  <script type="module">
+    import {
+      validationInput
+    } from '<?= base_url('assets/js/validation.js') ?>';
+
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+      if (validationInput(e)) {
+        loginForm.submit();
+      }
+    });
+  </script>
 
 </body>
 
