@@ -94,19 +94,19 @@
                                 Umur (bulan)
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Tinggi (cm)
+                                TB (cm)
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Berat (kg)
+                                BB (kg)
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Lingkar Kepala (cm)
+                                LK (cm)
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Lingkar Dada (cm)
+                                LD (cm)
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Lingkar Lengan (cm)
+                                LL (cm)
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Aksi
@@ -136,7 +136,7 @@
                                     <?= $measurements[$i]['arm_circum'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a data-modal-target="edit-data" data-modal-toggle="edit-data" data-id="<?= $measurements[$i]['id'] ?>" class="edit-btn cursor-pointer font-medium text-blue-600 hover:underline">Edit</a>
+                                    <a data-modal-target="edit-data" data-modal-toggle="edit-data" data-id="<?= $measurements[$i]['id'] ?>" class="sm:mr-1 edit-btn cursor-pointer font-medium text-blue-600 hover:underline">Edit</a>
                                     <a data-modal-target="delete-measurement" data-modal-toggle="delete-measurement" data-id="<?= $measurements[$i]['id'] ?>" class="delete-btn cursor-pointer font-medium text-red-600 hover:underline">Hapus</a>
                                 </td>
                             </tr>
