@@ -157,7 +157,7 @@
         <div class="card-body">
             <h6 class="text-lg text-gray-900 font-semibold">Grafik Badan</h6>
             <?php if ($measurements) : ?>
-                <div class="max-w-full w-full bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                <div class="max-w-full w-full bg-white rounded-lg shadow-sm">
                     <div id="weight-chart" class="px-1 py-4"></div>
                 </div>
             <?php else : ?>
@@ -169,7 +169,7 @@
         <div class="card-body">
             <h6 class="text-lg text-gray-900 font-semibold">Grafik Lingkar Badan</h6>
             <?php if ($measurements) : ?>
-                <div class="max-w-full w-full bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                <div class="max-w-full w-full bg-white rounded-lg shadow-sm">
                     <div id="circumference-chart" class="px-1 py-4"></div>
                 </div>
             <?php else : ?>
@@ -183,13 +183,13 @@
 <div id="edit-balita" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow-sm">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900">
                     Edit Data Balita
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-balita">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="edit-balita">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -202,14 +202,14 @@
                 <input type="hidden" value="<?= $data['id'] ?>" name="id">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Balita</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nama Balita</label>
                         <input value="<?= $data['name'] ?>" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="birth-date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Lahir</label>
+                        <label for="birth-date" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Lahir</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                 </svg>
                             </div>
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Kelamin</label>
+                        <label for="gender" class="block mb-2 text-sm font-medium text-gray-900">Jenis Kelamin</label>
                         <select id="gender" name="jenis-kelamin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
                             <option value="" disabled>Pilih Jenis Kelamin</option>
                             <option value="L" <?= ($data['jenis_kelamin'] == 'L') ? 'selected' : '' ?>>Laki-Laki</option>
@@ -226,7 +226,7 @@
                         </select>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                        <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
                         <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
                             <option value="" disabled>Pilih Jenis Kelamin</option>
                             <option value="normal" <?= ($data['status'] == 'normal') ? 'selected' : '' ?>>Normal</option>
@@ -239,11 +239,11 @@
                         <label for="is-toddler" class="text-sm font-medium text-gray-900">Masih Balita</label>
                     </div>
                     <div class="col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Keterangan atau deskripsi balita"><?= $data['description'] ?></textarea>
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Keterangan atau deskripsi balita"><?= $data['description'] ?></textarea>
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
                     <i class="ti ti-edit text-xl mr-2"></i>
                     Edit Data
                 </button>
@@ -256,13 +256,13 @@
 <div id="edit-parent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow-sm">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900">
                     Edit Data Orang Tua
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-parent">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="edit-parent">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -275,19 +275,19 @@
                 <input type="hidden" value="<?= $data['id'] ?>" name="id">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="parent-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Orang Tua</label>
+                        <label for="parent-name" class="block mb-2 text-sm font-medium text-gray-900">Nama Orang Tua</label>
                         <input value="<?= $data['parent_name'] ?>" type="text" name="parent-name" id="parent-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
                     <div>
-                        <label for="no-telp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No Telp Orang Tua</label>
+                        <label for="no-telp" class="block mb-2 text-sm font-medium text-gray-900">No Telp Orang Tua</label>
                         <input value="<?= $data['no_telp'] ?>" type="text" name="no-telp" id="no-telp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
                     <div>
-                        <label for="rt" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RT</label>
+                        <label for="rt" class="block mb-2 text-sm font-medium text-gray-900">RT</label>
                         <input value="<?= $data['rt'] ?>" type="number" min="1" name="rt" id="rt" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">
                     <i class="ti ti-edit text-xl mr-2"></i>
                     Edit Data
                 </button>
@@ -301,13 +301,13 @@
 <div id="add-data" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md sm:max-w-lg max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow-sm">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900">
                     Tambah Data Pengukuran
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="add-data">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="add-data">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -319,38 +319,38 @@
                 <input type="hidden" name="toddler-id" id="toddler-id" value="<?= $data['id'] ?>">
                 <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-6">
                     <div class="sm:col-span-6">
-                        <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Umur (bulan)</label>
+                        <label for="age" class="block mb-2 text-sm font-medium text-gray-900">Umur (bulan)</label>
                         <input value="" type="number" name="age" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Umur harus diisi</p>
 
                     </div>
                     <div class="sm:col-span-3">
-                        <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi (cm)</label>
+                        <label for="height" class="block mb-2 text-sm font-medium text-gray-900">Tinggi (cm)</label>
                         <input value="<?= ($measurements) ? end($measurements)['height'] : '' ?>" type="number" name="height" id="height" step="0.1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Tinggi badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-3">
-                        <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat (kg)</label>
+                        <label for="weight" class="block mb-2 text-sm font-medium text-gray-900">Berat (kg)</label>
                         <input value="<?= ($measurements) ? end($measurements)['weight'] : '' ?>" type="number" name="weight" step="0.1" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Berat badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Kepala (cm)</label>
+                        <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900">Lingkar Kepala (cm)</label>
                         <input value="<?= ($measurements) ? end($measurements)['head_circum'] : '' ?>" type="number" name="head_circum" step="0.1" id="head_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Lingkar kepala harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Dada (cm)</label>
+                        <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900">Lingkar Dada (cm)</label>
                         <input value="<?= ($measurements) ? end($measurements)['chest_size'] : '' ?>" type="number" name="chest_size" step="0.1" id="chest_size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Lingkar dada harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Lengan (kg)</label>
+                        <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900">Lingkar Lengan (kg)</label>
                         <input value="<?= ($measurements) ? end($measurements)['arm_circum'] : '' ?>" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Lingkar lengan harus diisi</p>
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                     </svg>
@@ -366,13 +366,13 @@
 <div id="edit-data" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md sm:max-w-lg max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+        <div class="relative bg-white rounded-lg shadow-sm">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                <h3 class="text-lg font-semibold text-gray-900">
                     Edit Data Pengukuran
                 </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="edit-data">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="edit-data">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
@@ -385,37 +385,37 @@
                 <input type="hidden" name="id" id="id" value="">
                 <div class="grid gap-4 mb-4 grid-cols-1 sm:grid-cols-6">
                     <div class="sm:col-span-6">
-                        <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Umur (bulan)</label>
+                        <label for="age" class="block mb-2 text-sm font-medium text-gray-900">Umur (bulan)</label>
                         <input value="" disabled type="number" name="age" id="age" aria-label="disabled input" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed">
                         <p class="hidden mt-2 text-xs text-red-600">Umur harus diisi</p>
                     </div>
                     <div class="sm:col-span-3">
-                        <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tinggi (cm)</label>
+                        <label for="height" class="block mb-2 text-sm font-medium text-gray-900">Tinggi (cm)</label>
                         <input value="" type="number" name="height" id="height" step="0.1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Tinggi badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-3">
-                        <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Berat Badan (kg)</label>
+                        <label for="weight" class="block mb-2 text-sm font-medium text-gray-900">Berat Badan (kg)</label>
                         <input value="" type="number" name="weight" step="0.1" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Berat badan harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Kepala (cm)</label>
+                        <label for="head_circum" class="block mb-2 text-sm font-medium text-gray-900">Lingkar Kepala (cm)</label>
                         <input value="" type="number" name="head_circum" step="0.1" id="head_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Lingkar kepala harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Dada (cm)</label>
+                        <label for="chest_size" class="block mb-2 text-sm font-medium text-gray-900">Lingkar Dada (cm)</label>
                         <input value="" type="number" name="chest_size" step="0.1" id="chest_size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Lingkar dada harus diisi</p>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lingkar Lengan (cm)</label>
+                        <label for="arm_circum" class="block mb-2 text-sm font-medium text-gray-900">Lingkar Lengan (cm)</label>
                         <input value="" type="number" name="arm_circum" step="0.1" id="arm_circum" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                         <p class="hidden mt-2 text-xs text-red-600">Lingkar lengan harus diisi</p>
                     </div>
                 </div>
-                <button type="submit" class="text-white inline-flex gap-2 items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="submit" class="text-white inline-flex gap-2 items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
@@ -432,8 +432,8 @@
 <!-- Delete Measurement Data -->
 <div id="delete-measurement" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete-measurement">
+        <div class="relative bg-white rounded-lg shadow-sm">
+            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="delete-measurement">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
@@ -443,11 +443,11 @@
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="id" id="id" value="">
                 <div class="p-4 md:p-5 text-center">
-                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda yakin ingin menghapus data untuk umur <span id="age-delete"></span>?</h3>
-                    <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                    <h3 class="mb-5 text-lg font-normal text-gray-500">Apakah Anda yakin ingin menghapus data untuk umur <span id="age-delete"></span>?</h3>
+                    <button type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                         Iya, saya yakin
                     </button>
                     <button data-modal-hide="delete-measurement" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Tidak</button>
@@ -690,7 +690,7 @@
                     text: 'Umur (bulan)',
                     style: {
                         fontFamily: "Inter, sans-serif",
-                        cssClass: 'text-sm font-normal fill-gray-500 dark:fill-gray-400'
+                        cssClass: 'text-sm font-normal fill-gray-500'
                     }
                 },
                 show: true,
@@ -699,7 +699,7 @@
                     show: true,
                     style: {
                         fontFamily: "Inter, sans-serif",
-                        cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                        cssClass: 'text-xs font-normal fill-gray-500'
                     }
                 },
                 axisBorder: {
@@ -792,7 +792,7 @@
                     text: 'Umur (bulan)',
                     style: {
                         fontFamily: "Inter, sans-serif",
-                        cssClass: 'text-sm font-normal fill-gray-500 dark:fill-gray-400'
+                        cssClass: 'text-sm font-normal fill-gray-500'
                     }
                 },
                 show: true,
@@ -801,7 +801,7 @@
                     show: true,
                     style: {
                         fontFamily: "Inter, sans-serif",
-                        cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                        cssClass: 'text-xs font-normal fill-gray-500'
                     }
                 },
                 axisBorder: {
