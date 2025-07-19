@@ -465,6 +465,11 @@
 <script src="<?= base_url('assets/js/library/apexcharts.min.js') ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script type="module">
+    // FUngsi Pembulatan
+    const roundToFixed = (value, decimalPlaces) => {
+            return parseFloat(value).toFixed(decimalPlaces);
+        }
+    
     // Mengubah format tanggal lahir
     const date = document.getElementById('birth-date');
 
@@ -634,7 +639,7 @@
             const allAges = getAllAges();
 
             if (dataInput['age'].disabled) {
-                // Jika umur sudah diisi, tidak perlu validasi lagi
+
             } else if (dataInput['age'].value == '') { // Mengatasi umur kosong
                 showMessage('age', 'Umur harus diisi');
                 return false;
