@@ -634,7 +634,7 @@
             const allAges = getAllAges();
 
             if (dataInput['age'].disabled) {
-
+                // Jika umur sudah diisi, tidak perlu validasi lagi
             } else if (dataInput['age'].value == '') { // Mengatasi umur kosong
                 showMessage('age', 'Umur harus diisi');
                 return false;
@@ -684,6 +684,7 @@
                 const armCircum = cells[5].innerText;
                 const id = this.dataset.id;
 
+                editMeasurementForm.querySelector("#id").value = id;
                 editMeasurementForm.querySelector("#age").value = age;
                 editMeasurementForm.querySelector("#height").value = height;
                 editMeasurementForm.querySelector("#weight").value = weight;
