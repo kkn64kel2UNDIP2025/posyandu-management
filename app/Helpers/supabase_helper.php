@@ -2,12 +2,9 @@
 // app/Helpers/supabase_helper.php
 
 function supabase_client() {
-    $supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0bHpzeW1uaXFpYmJzcHhiZnJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzNDA2NTIsImV4cCI6MjA2NjkxNjY1Mn0.K9sA9AjF31nzKH6iGkG9c_O5WXV_5PHFZUGrR3_frTQ';
-    $supabaseEdgeFunctionUrl = 'https://gtlzsymniqibbspxbfrb.supabase.co/functions/v1/auth-codeigniter';
-    
     return [
-        'url' => $supabaseEdgeFunctionUrl,
-        'key' => $supabaseAnonKey
+        'url' => getenv('SUPABASE_URL'),
+        'key' => getenv('SUPABASE_ANON_KEY')
     ];
 }
 

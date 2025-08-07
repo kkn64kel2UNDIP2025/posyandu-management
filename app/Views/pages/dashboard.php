@@ -1,6 +1,12 @@
 <?php $this->extend('layout/template') ?>
 <?php $this->section('content') ?>
 
+<?php
+    $femaleToddler = isset($genderGroupTotal['P']) ? $genderGroupTotal['P'] : 0;
+    $maleToddler = isset($genderGroupTotal['L']) ? $genderGroupTotal['L'] : 0;
+    $totalToddler = $femaleToddler + $maleToddler;
+?>
+
 <!-- Main Content -->
 <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 gap-x-0 lg:gap-y-0 gap-y-6 items-stretch">
     <div class="lg:col-span-2 space-y-6">
@@ -8,19 +14,19 @@
             <div class="card card-body">
                 <div class="text-gray-900">
                     <h4 class="text-lg font-semibold sm:mb-0 mb-2">Total Balita</h4>
-                    <p class="text-3xl font-bold mt-2" id="total-toddlers"><?= $genderGroupTotal[0]['toddler_count'] + $genderGroupTotal[1]['toddler_count'] ?></p>
+                    <p class="text-3xl font-bold mt-2" id="total-toddlers"><?= $totalToddler ?></p>
                 </div>
             </div>
             <div class="card card-body">
                 <div class="text-gray-900">
                     <h4 class="text-lg font-semibold sm:mb-0 mb-2">Balita Laki-laki</h4>
-                    <p class="text-3xl font-bold mt-2" id="male-toddlers"><?= $genderGroupTotal[1]['toddler_count'] ?></p>
+                    <p class="text-3xl font-bold mt-2" id="male-toddlers"><?= $maleToddler ?></p>
                 </div>
             </div>
             <div class="card card-body">
                 <div class="text-gray-900">
                     <h4 class="text-lg font-semibold sm:mb-0 mb-2">Balita Perempuan</h4>
-                    <p class="text-3xl font-bold mt-2" id="female-toddlers"><?= $genderGroupTotal[0]['toddler_count'] ?></p>
+                    <p class="text-3xl font-bold mt-2" id="female-toddlers"><?= $femaleToddler ?></p>
                 </div>
             </div>
         </div>

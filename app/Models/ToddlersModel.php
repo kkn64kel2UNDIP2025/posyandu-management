@@ -68,10 +68,15 @@ class ToddlersModel extends Model
 
     public function getGenderGroupTotal()
     {
-        return $this->select('jenis_kelamin, COUNT(*) as toddler_count')
+        $data = $this->select('jenis_kelamin, COUNT(*) as toddler_count')
                     ->where('still_toddler', true)
                     ->groupBy('jenis_kelamin')
                     ->findAll();
+        $result = [];
+        foreach ($data as $row) {
+            $result[$row['jenis_kelamin']] = $row['toddler_count'];
+        }
+        return $result;
     }
 
     public function getStatusGroupTotal()

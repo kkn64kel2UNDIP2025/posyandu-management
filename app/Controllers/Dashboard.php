@@ -26,8 +26,6 @@ class Dashboard extends BaseController
             'statusGroupTotal' => $this->toddlersModel->getStatusGroupTotal(),
         ];
 
-        // dd($data); // Debugging line, remove in production
-
         return view('pages/dashboard', $data);
     }
 }
