@@ -1,4 +1,7 @@
 # 🩺 Manajemen Posyandu
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fkkn64kel2UNDIP2025%2Fpembasmi-nyamuk%2Frefs%2Fheads%2Fmain%2Fcomposer.json&query=require.codeigniter4%2Fframework&logo=codeigniter&logoColor=%23EF4223&label=Codeigniter&color=%23EF4223)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat&logo=supabase&logoColor=white)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fkkn64kel2UNDIP2025%2Fpembasmi-nyamuk%2Frefs%2Fheads%2Fmain%2Fpackage.json&query=dependencies.%40tailwindcss%2Fcli&logo=tailwindcss&logoColor=%2306B6D4&label=TailwindCSS&color=%2306B6D4)
 
 Aplikasi **Manajemen Posyandu** adalah aplikasi berbasis web yang dirancang untuk membantu pengelolaan data balita dan pencatatan hasil pengukuran secara digital. Aplikasi ini memudahkan pengguna dalam menambahkan, mencari, mengelola, memantau, serta merekap data pertumbuhan balita secara lebih terstruktur.
 
