@@ -1,68 +1,117 @@
-# CodeIgniter 4 Application Starter
+# 🩺 Manajemen Posyandu
 
-## What is CodeIgniter?
+Aplikasi **Manajemen Posyandu** adalah aplikasi berbasis web yang dirancang untuk membantu pengelolaan data balita dan pencatatan hasil pengukuran secara digital. Aplikasi ini memudahkan pengguna dalam menambahkan, mencari, mengelola, memantau, serta merekap data pertumbuhan balita secara lebih terstruktur.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## ✨ Fitur
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+### 🔐 Authentication
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Sistem autentikasi untuk mengelola akses pengguna ke dalam aplikasi.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+<p align="center">
+  <img width="80%" alt="Halaman Login" src="https://github.com/user-attachments/assets/ca0d8981-92a4-4c74-8915-5261001c6dfe" />
+</p>
 
-## Installation & updates
+### 📊 Dashboard
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+Menampilkan ringkasan dan visualisasi data balita untuk membantu pengguna memantau informasi secara cepat.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+<p align="center">
+  <img width="80%" alt="Halaman Dashboard" src="https://github.com/user-attachments/assets/d53a7cb8-f088-4a65-baf0-e8954ab03386" />
+</p>
 
-## Setup
+### 👶 Manajemen Data Balita
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Pengguna dapat menambahkan, mengelola, dan mencari data balita yang terdaftar pada sistem.
+<p align="center">
+  <img width="80%" alt="Manajemen Data Balita" src="https://github.com/user-attachments/assets/2c016bc4-f6ee-4a20-861e-9d628534d960" />
+</p>
 
-## Important Change with index.php
+### 📏 Manajemen Data Pengukuran
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Mencatat dan mengelola data hasil pengukuran balita, seperti berat badan, tinggi badan, dan data pengukuran lainnya.
+<p align="center">
+  <img width="80%" alt="Manajemen Data Pengukuran" src="https://github.com/user-attachments/assets/de2ea0f3-f334-42f7-a4aa-0f80758062cc" />
+</p>
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### 📈 Visualisasi Pertumbuhan Balita
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Menampilkan visualisasi data pengukuran untuk membantu memantau perkembangan dan pertumbuhan setiap balita.
 
-## Repository Management
+<p align="center">
+  <img width="80%" alt="Manajemen Data Pengukuran" src="https://github.com/user-attachments/assets/8e6d13e8-537e-46de-8d9e-12cdd928b136" />
+</p>
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### 📅 Rekap Data Pengukuran Bulanan
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Menyediakan rekapitulasi data pengukuran balita berdasarkan periode atau bulan tertentu.
 
-## Server Requirements
+<p align="center">
+  <img width="80%" alt="Manajemen Data Pengukuran" src="https://github.com/user-attachments/assets/1c90d831-a3b3-4abb-bc8b-f7abc5c9a4a5" />
+</p>
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+## 🛠️ Tech Stack
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+* **Backend:** CodeIgniter 4
+* **Database:** Supabase
+* **Database Engine:** PostgreSQL
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+## 🚀 Installation
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### 1. Clone Repository
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
+
+### 2. Install Dependencies
+
+```bash
+composer install
+```
+
+### 3. Konfigurasi Environment
+
+Salin file `.env` dan sesuaikan konfigurasi database:
+
+```bash
+cp env .env
+```
+
+Konfigurasikan koneksi PostgreSQL Supabase pada file `.env`:
+
+```env
+database.default.hostname=your_supabase_host
+database.default.database=postgres
+database.default.username=your_database_username
+database.default.password=your_database_password
+database.default.DBDriver=Postgre
+database.default.port=5432
+```
+
+### 4. Jalankan Migrasi
+
+```bash
+php spark migrate
+```
+
+### 5. Jalankan Aplikasi
+
+```bash
+php spark serve
+```
+
+Aplikasi akan berjalan secara default pada:
+
+```text
+http://localhost:8080
+```
+
+## 🎯 Tujuan
+
+Aplikasi ini dikembangkan untuk membantu proses administrasi dan pengelolaan data di Posyandu dengan menyediakan sistem yang lebih **digital, terstruktur, dan mudah digunakan**, sehingga data balita dan riwayat pengukurannya dapat dikelola serta dipantau dengan lebih efektif.
+
+## 📄 License
+
+This project is intended for educational and development purposes.
